@@ -4,7 +4,8 @@
   "description": "It's like Patatap but social and collaborative",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/mit6148/MFarejowicz-simpko/issues"
   },
-  "homepage": "https://github.com/mit6148/MFarejowicz-simpko#readme"
+  "homepage": "https://github.com/mit6148/MFarejowicz-simpko#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
