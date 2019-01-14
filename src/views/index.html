@@ -1,12 +1,26 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Collabatap</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico"/>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/static/js/sound.js" defer></script>
+    <script src="/static/js/index.js" defer></script>
+    <title>soundspace</title>
   </head>
   <body>
-    <h1>Hit buttons to play """music"""</h1>
+    <div id="top">
+      <div id="prompt">
+        <span class="blink" id="prompt-text">press any key to start</span>
+      </div>
+    </div>
+    <div id="bot">
+      <span class="clickable" id="about">about</span>
+      <span class="clickable" id="host">host space</span>
+      <span class="clickable" id="join">join space</span>
+      <span class="clickable" id="login">login</span>
+      <span class="clickable" id="obs">observatory</span>
+    </div>
   </body>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/static/js/sound.js"></script>
-  <script src="/static/js/index.js"></script>
 </html>
