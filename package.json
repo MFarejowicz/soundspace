@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/mit6148/MFarejowicz-simpko#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9",
+    "socket.io": "^2.2.0"
   }
 }
