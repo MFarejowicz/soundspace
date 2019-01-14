@@ -23,8 +23,15 @@
   },
   "homepage": "https://github.com/mit6148/MFarejowicz-simpko#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "nodemon": "^1.18.9",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.4.4",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
     "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }
