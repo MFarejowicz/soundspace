@@ -1,14 +1,14 @@
 const socket = io();
 
-function removeFadeOut(el, speed) {
+function fadeOutAndRemove(el, speed) {
   const seconds = speed / 1000;
   el.style.transition = `opacity ${seconds}s ease`;
-  setTimeout(() => el.style.opacity = 0, 0);
+  setTimeout(() => el.style.opacity = 0, 100);
   setTimeout(() => el.parentNode.removeChild(el), speed);
 }
 
-function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
 function spawnStar() {
@@ -17,15 +17,15 @@ function spawnStar() {
   let height = top.offsetHeight-50;
 
   let star = document.createElement('img');
-  let x = getRandomArbitrary(0, width);
-  let y = getRandomArbitrary(0, height);
+  let x = getRandom(0, width);
+  let y = getRandom(0, height);
   star.setAttribute('src', '/static/img/star.png');
   star.setAttribute('class', 'star');
   star.style.top = `${y}px`;
   star.style.left = `${x}px`;
 
   top.appendChild(star);
-  removeFadeOut(star, 2000);
+  fadeOutAndRemove(star, 2000);
 }
 
 window.onload = () => {
@@ -49,15 +49,14 @@ window.onload = () => {
     }
 
     if (prompt) {
-      removeFadeOut(document.getElementById('prompt'), 1500);
+      fadeOutAndRemove(document.getElementById('prompt'), 2000);
       prompt = false;
     }
-
-    spawnStar();
   }
 }
 
-socket.on('play sound', sound => {
+socket.on('play sound', (sound) => {
   console.log('received sound ' + sound);
   playSound(sound);
-})
+  spawnStar();
+});
