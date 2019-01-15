@@ -1,17 +1,15 @@
 const express = require('express');
-const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
-const session = require('express-session');
 
 const db = require('./db');
 const passport = require('./passport');
 const views = require('./routes/views');
 
-app.use('/', views);
-app.use('/static', express.static('public'));
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 // Set up body-parser to let us get the body of POST requests
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,8 +24,8 @@ nunjucks.configure('src/views', {
 // Set up sessions
 app.use(session({
   secret: 'session-secret',
-  saveUninitialized: true,
-  resave: false
+  resave: 'false',
+  saveUninitialized: 'true'
 }));
 
 // Set up actual passport usage
@@ -47,6 +45,9 @@ app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
+
+app.use('/', views);
+app.use('/static', express.static('public'));
 
 io.on('connection', function(socket) {
   socket.on('play sound', sound => {

@@ -22,6 +22,7 @@ passport.use(new GoogleStrategy({
 
       user.save(function (err) {
         if (err) console.log(err);
+
         return done(err, user);
       });
     } else {
