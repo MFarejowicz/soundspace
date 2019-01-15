@@ -12,10 +12,10 @@ passport.use(new GoogleStrategy({
 }, function (accessToken, refreshToken, profile, done) {
   User.findOne({ 'googleid': profile.id }, function (err, user) {
     if (err) return done(err);
-    console.log(`User ${profile.displayName} logged in!`);
+    console.log(`User ${profile.displayName} logged in?`);
 
     if (!user) {
-      user = new User({
+      const user = new User({
         name: profile.displayName,
         googleid: profile.id
       });
@@ -30,10 +30,11 @@ passport.use(new GoogleStrategy({
   });
 }));
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
-passport.deserializeUser(function (obj, done) {
+
+passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 

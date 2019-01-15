@@ -3,12 +3,13 @@ const router = express.Router();
 
 // Root endpoint
 router.get('/', function(req, res) {
-  res.sendFile('index.html', { root: 'src/views' });
+  console.log(req.isAuthenticated());
+  res.render('index.html', { loggedIn: req.isAuthenticated() });
 });
 
 // About endpoint
 router.get('/about', function(req, res) {
-  res.sendFile('about.html', { root: 'src/views' });
-})
+  res.render('about.html');
+});
 
 module.exports = router;

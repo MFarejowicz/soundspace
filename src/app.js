@@ -3,6 +3,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const bodyParser = require('body-parser');
+const nunjucks = require('nunjucks');
 const session = require('express-session');
 
 const db = require('./db');
@@ -16,11 +17,17 @@ app.use('/static', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Set up nunjucks to be used for rendering
+nunjucks.configure('src/views', {
+  autoescape: true,
+  express: app
+});
+
 // Set up sessions
 app.use(session({
   secret: 'session-secret',
-  resave: 'false',
-  saveUninitialized: 'true'
+  saveUninitialized: true,
+  resave: false
 }));
 
 // Set up actual passport usage
@@ -32,7 +39,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }))
 
 // Set up login callback route (when you return from login)
 app.get('/auth/google/callback',
-  passport.authenticate('google', { successRedirect: 'back', failureRedirect: 'back' })
+  passport.authenticate('google', {successRedirect: 'back', failureRedirect: 'back', session: true})
 );
 
 // Set up logout route

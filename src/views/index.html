@@ -1,14 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico"/>
-    <link rel="stylesheet" href="/static/css/style.css"/>
+{% extends 'base.html' %}
 
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="/static/js/sound.js" defer></script>
-    <script src="/static/js/index.js" defer></script>
-    <title>soundspace</title>
-  </head>
+{% block content %}
   <body>
     <div id="top">
       <div id="prompt">
@@ -16,11 +8,18 @@
       </div>
     </div>
     <div id="bot">
-      <span class="clickable" id="about">about</span>
-      <span class="clickable" id="host">host space</span>
-      <span class="clickable" id="join">join space</span>
-      <a class="clickable" id="login" href="/auth/google">login</a>
-      <span class="clickable" id="obs">observatory</span>
+      <a class="bot-link" id="about">about</a>
+      <a class="bot-link" id="host">host space</a>
+      <a class="bot-link" id="join">join space</a>
+      {% if loggedIn %}
+      <a class="bot-link" id="logout" href="/logout">logout</a>
+      {% else %}
+      <a class="bot-link" id="login" href="/auth/google">login</a>
+      {% endif %}
+      <a class="bot-link" id="obs">observatory</a>
     </div>
   </body>
-</html>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/static/js/sound.js"></script>
+  <script src="/static/js/index.js"></script>
+{% endblock %}
