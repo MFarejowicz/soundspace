@@ -28,24 +28,37 @@ function spawnStar() {
   fadeOutAndRemove(star, 2000);
 }
 
+function joinPopup() {
+  const joinPopup = document.getElementById('join-popup');
+  joinPopup.classList.toggle('show');
+  joinPopup.classList.toggle('hide');
+}
+
 window.onload = () => {
   let prompt = true;
   document.onkeypress = (e) => {
-    switch (e.keyCode) {
-      case 113:
-        socket.emit('play sound', 'h1');
-        break;
-      case 119:
-        socket.emit('play sound', 'h2');
-        break;
-      case 101:
-        socket.emit('play sound', 'h3');
-        break;
-      case 114:
-        socket.emit('play sound', 'h4');
-        break;
-      default:
-        console.log(e.keyCode);
+    const joinInput = document.getElementById('join-input');
+    if (!(joinInput === document.activeElement)) {
+      switch (e.keyCode) {
+        case 113:
+          socket.emit('play sound', 'h1');
+          break;
+        case 119:
+          socket.emit('play sound', 'h2');
+          break;
+        case 101:
+          socket.emit('play sound', 'h3');
+          break;
+        case 114:
+          socket.emit('play sound', 'h4');
+          break;
+        default:
+          console.log(e.keyCode);
+      }
+    } else {
+      if (e.keyCode === 13) {
+        window.location.href = `${window.location.origin}/${joinInput.value}`;
+      }
     }
 
     if (prompt) {

@@ -56,6 +56,55 @@ a {
   padding: 10px;
 }
 
+#join-space {
+  position: relative;
+  padding: 8px 0;
+}
+
+.popup {
+  visibility: hidden;
+  width: 100px;
+  background-color: green;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -50px;
+}
+
+.show {
+  visibility: visible;
+  animation: fadeIn 0.5s;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+#join-input {
+  width: 100%;
+  padding: 4px 0;
+  background-color: green;
+  color: white;
+  text-decoration: none;
+  border: none;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+#join-input:focus {
+  outline: none;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 @keyframes blink {
   50% {
     opacity: 1;
