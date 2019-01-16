@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <body>
+  <body class="container">
     <div id="top">
       <div id="prompt">
         <span class="blink" id="prompt-text">press any key to start</span>
       </div>
     </div>
     <div id="bot">
-      <a class="bot-link" id="about">about</a>
+      <a class="bot-link" id="about" href="/about">about</a>
       <a class="bot-link" id="host">host space</a>
       <a class="bot-link" id="join">join space</a>
       {% if loggedIn %}
@@ -16,7 +16,7 @@
       {% else %}
       <a class="bot-link" id="login" href="/auth/google">login</a>
       {% endif %}
-      <a class="bot-link" id="obs">observatory</a>
+      <a class="bot-link" id="obs" href="/observatory">observatory</a>
     </div>
   </body>
   <script src="/socket.io/socket.io.js"></script>

@@ -24,8 +24,8 @@ nunjucks.configure('src/views', {
 // Set up sessions
 app.use(session({
   secret: 'session-secret',
-  resave: 'false',
-  saveUninitialized: 'true'
+  resave: false,
+  saveUninitialized: true
 }));
 
 // Set up actual passport usage
