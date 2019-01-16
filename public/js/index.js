@@ -55,6 +55,19 @@ window.onload = () => {
   }
 }
 
+function generateSpaceId() {
+  let firstPart = (Math.random() * 46656) | 0;
+  let secondPart = (Math.random() * 46656) | 0;
+  firstPart = ('00' + firstPart.toString(36)).slice(-2);
+  secondPart = ('00' + secondPart.toString(36)).slice(-2);
+  return firstPart + secondPart;
+};
+
+function createSpace() {
+  const spaceId = generateSpaceId();
+  window.location.href = `${window.location.origin}/${spaceId}`;
+}
+
 socket.on('connect', () => {
   const spacecode = window.location.pathname.slice(1);
   if (spacecode.length === 4) {

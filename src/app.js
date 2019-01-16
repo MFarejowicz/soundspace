@@ -37,7 +37,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }))
 
 // Set up login callback route (when you return from login)
 app.get('/auth/google/callback',
-  passport.authenticate('google', {successRedirect: 'back', failureRedirect: 'back', session: true})
+  passport.authenticate('google', { successReturnToOrRedirect: 'back', failureRedirect: 'back', session: true})
 );
 
 // Set up logout route
