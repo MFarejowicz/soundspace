@@ -55,6 +55,15 @@ window.onload = () => {
   }
 }
 
+socket.on('connect', () => {
+  const spacecode = window.location.pathname.slice(1);
+  if (spacecode.length === 4) {
+    socket.emit('join room', spacecode);
+  } else if (spacecode.length === 0) {
+    socket.emit('join room', 'default');
+  }
+});
+
 socket.on('play sound', (sound) => {
   console.log('received sound ' + sound);
   playSound(sound);

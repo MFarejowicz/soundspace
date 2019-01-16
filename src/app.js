@@ -50,9 +50,13 @@ app.use('/', views);
 app.use('/static', express.static('public'));
 
 io.on('connection', function(socket) {
-  socket.on('play sound', sound => {
-    io.emit('play sound', sound);
+  socket.on('play sound', (sound) => {
+    io.to(socket.room).emit('play sound', sound);
   });
+  socket.on('join room', (room) => {
+    socket.room = room;
+    socket.join(room);
+  })
 });
 
 http.listen(3000, () => console.log('App listening on port 3000!'));

@@ -16,4 +16,12 @@ router.get('/observatory', function(req, res) {
   res.render('observatory.html');
 })
 
+router.get('/:space', function(req, res) {
+  const space = req.params.space;
+  console.log("room: " + space);
+  if (space.length === 4) {
+    res.render('index.html', { loggedIn: req.isAuthenticated() } );
+  }
+});
+
 module.exports = router;
