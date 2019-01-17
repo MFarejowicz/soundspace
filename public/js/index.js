@@ -138,6 +138,18 @@ window.onload = () => {
         case 115:
           socket.emit('play sound', 'jazzy1');
           break;
+        case 107:
+          socket.emit('play sound', 'warm1');
+          break;
+        case 102:
+          socket.emit('play sound', 'pluckFs5');
+          break;
+        case 103:
+          socket.emit('play sound', 'pluckGs5');
+          break;
+        case 104:
+          socket.emit('play sound', 'pluckAs5');
+          break;
         default:
           console.log(e.keyCode);
       }

@@ -46,6 +46,18 @@ var sounds = {
   jazzy1: {
     url: "/static/audio/jazzy1.mp3"
   },
+  warm1: {
+    url: "/static/audio/warm1.mp3"
+  },
+  pluckFs5: {
+    url: "/static/audio/pluckFs5.mp3"
+  },
+  pluckGs5: {
+    url: "/static/audio/pluckGs5.mp3"
+  },
+  pluckAs5: {
+    url: "/static/audio/pluckAs5.mp3"
+  },
 };
 
 for (let key in sounds) {
