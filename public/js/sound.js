@@ -24,7 +24,28 @@ var sounds = {
   },
   B4: {
     url: "/static/audio/B4.mp3"
-  }
+  },
+  neosweep: {
+    url: "/static/audio/neo-sweep.wav"
+  },
+  pew: {
+    url: "/static/audio/pew.wav"
+  },
+  bass: {
+    url: "/static/audio/bass.wav"
+  },
+  chipkick: {
+    url: "/static/audio/chipkick.wav"
+  },
+  piano5: {
+    url: "/static/audio/piano5.mp3"
+  },
+  xylochord: {
+    url: "/static/audio/xylochord.wav"
+  },
+  jazzy1: {
+    url: "/static/audio/jazzy1.mp3"
+  },
 };
 
 for (let key in sounds) {

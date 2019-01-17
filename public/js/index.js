@@ -117,6 +117,27 @@ window.onload = () => {
         case 118:
           socket.emit('play sound', 'B4');
           break;
+        case 108:
+          socket.emit('play sound', 'neosweep');
+          break;
+        case 97:
+          socket.emit('play sound', 'pew');
+          break;
+        case 112:
+          socket.emit('play sound', 'bass');
+          break;
+        case 111:
+          socket.emit('play sound', 'chipkick');
+          break;
+        case 109:
+          socket.emit('play sound', 'piano5');
+          break;
+        case 110:
+          socket.emit('play sound', 'xylochord');
+          break;
+        case 115:
+          socket.emit('play sound', 'jazzy1');
+          break;
         default:
           console.log(e.keyCode);
       }
@@ -159,5 +180,4 @@ socket.on('play sound', (sound) => {
   console.log('received sound ' + sound);
   playSound(sound);
   spawnRandom();
-  // spawnStar();
 });
