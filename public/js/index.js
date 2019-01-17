@@ -61,7 +61,7 @@ function spawnSun() {
   let star = document.createElement('img');
   let x = getRandom(0, width);
   let y = getRandom(0, height);
-  star.setAttribute('src', `/static/img/sun.png`);
+  star.setAttribute('src', `/static/img/ship1.gif`);
   star.setAttribute('class', 'star');
   star.style.top = `${y}px`;
   star.style.left = `${x}px`;
@@ -72,9 +72,9 @@ function spawnSun() {
 
 function spawnRandom() {
   let rand = Math.random()
-  if (rand < 0.9) {
+  if (rand < 0.98) {
     spawnStar()
-  } else if (rand < 0.98) {
+  } else if (rand < 0.995) {
     spawnPlanet()
   } else {
     spawnSun()
