@@ -13,6 +13,18 @@ var sounds = {
   h4: {
     url: "/static/audio/h4.mp3"
   },
+  C4: {
+    url: "/static/audio/C4.mp3"
+  },
+  E4: {
+    url: "/static/audio/E4.mp3"
+  },
+  G4: {
+    url: "/static/audio/G4.mp3"
+  },
+  B4: {
+    url: "/static/audio/B4.mp3"
+  }
 };
 
 for (let key in sounds) {

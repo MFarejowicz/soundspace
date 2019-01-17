@@ -10,9 +10,9 @@ passport.use(new GoogleStrategy({
   clientSecret: googleCredentials.clientSecret,
   callbackURL: '/auth/google/callback'
 }, function (accessToken, refreshToken, profile, done) {
-  User.findOne({ 'googleid': profile.id }, function (err, user) {
+  User.findOne({ googleid: profile.id }, function (err, user) {
     if (err) return done(err);
-    console.log(`User ${profile.displayName} logged in?`);
+    console.log(`User ${profile.displayName} logged in!`);
 
     if (!user) {
       const user = new User({
