@@ -11,6 +11,12 @@ function getRandom(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function spawnStar() {
   let top = document.getElementById('top');
   let width = top.offsetWidth-50;
@@ -19,7 +25,8 @@ function spawnStar() {
   let star = document.createElement('img');
   let x = getRandom(0, width);
   let y = getRandom(0, height);
-  star.setAttribute('src', '/static/img/star.png');
+  let num = getRandomInt(1, 3)
+  star.setAttribute('src', `/static/img/star${num}.png`);
   star.setAttribute('class', 'star');
   star.style.top = `${y}px`;
   star.style.left = `${x}px`;
