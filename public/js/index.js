@@ -35,6 +35,52 @@ function spawnStar() {
   fadeOutAndRemove(star, 2000);
 }
 
+function spawnPlanet() {
+  let top = document.getElementById('top');
+  let width = top.offsetWidth-50;
+  let height = top.offsetHeight-50;
+
+  let star = document.createElement('img');
+  let x = getRandom(0, width);
+  let y = getRandom(0, height);
+  let num = getRandomInt(1, 5)
+  star.setAttribute('src', `/static/img/planet${num}.png`);
+  star.setAttribute('class', 'star');
+  star.style.top = `${y}px`;
+  star.style.left = `${x}px`;
+
+  top.appendChild(star);
+  fadeOutAndRemove(star, 10000);
+}
+
+function spawnSun() {
+  let top = document.getElementById('top');
+  let width = top.offsetWidth-100;
+  let height = top.offsetHeight-100;
+
+  let star = document.createElement('img');
+  let x = getRandom(0, width);
+  let y = getRandom(0, height);
+  star.setAttribute('src', `/static/img/sun.png`);
+  star.setAttribute('class', 'star');
+  star.style.top = `${y}px`;
+  star.style.left = `${x}px`;
+
+  top.appendChild(star);
+  fadeOutAndRemove(star, 20000);
+}
+
+function spawnRandom() {
+  let rand = Math.random()
+  if (rand < 0.9) {
+    spawnStar()
+  } else if (rand < 0.98) {
+    spawnPlanet()
+  } else {
+    spawnSun()
+  }
+}
+
 function joinPopup() {
   const joinPopup = document.getElementById('join-popup');
   joinPopup.classList.toggle('show');
@@ -100,5 +146,6 @@ socket.on('connect', () => {
 socket.on('play sound', (sound) => {
   console.log('received sound ' + sound);
   playSound(sound);
-  spawnStar();
+  spawnRandom();
+  // spawnStar();
 });
