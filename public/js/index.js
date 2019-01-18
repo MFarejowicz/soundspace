@@ -163,6 +163,15 @@ window.onload = () => {
       fadeOutAndRemove(document.getElementById('prompt'), 2000);
       prompt = false;
     }
+
+    // Check if the user is logged in by looking for the log out element
+    if (document.getElementById('logout')) {
+      // Make post request to track taps
+      axios.post('/api/tap')
+      .catch((error) => {
+        console.log(error);
+      });
+    }
   }
 }
 

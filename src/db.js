@@ -6,6 +6,7 @@ const mongoURL = mongoCredentials.url;
 const options = {
   useNewUrlParser: true
 };
+mongoose.set('useFindAndModify', false);
 mongoose.connect(mongoURL, options);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;

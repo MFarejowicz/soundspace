@@ -6,6 +6,7 @@ const nunjucks = require('nunjucks');
 const db = require('./db');
 const passport = require('./passport');
 const views = require('./routes/views');
+const api = require('./routes/api');
 
 const app = express();
 const http = require('http').Server(app);
@@ -47,6 +48,7 @@ app.get('/logout', function(req, res) {
 });
 
 app.use('/', views);
+app.use('/api', api);
 app.use('/static', express.static('public'));
 
 io.on('connection', function(socket) {
