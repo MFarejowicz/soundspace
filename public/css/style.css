@@ -33,6 +33,10 @@ a {
   flex: 1;
 }
 
+#top-bar {
+  transition: opacity 4s ease;
+}
+
 .top-container {
   flex: 1;
   display: flex;

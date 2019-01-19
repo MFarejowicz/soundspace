@@ -90,13 +90,15 @@ window.onload = () => {
 
   let bot = document.getElementById('bot');
   document.onmousemove = () => {
-    bot.style.transition = "opacity 1s ease";
-    bot.style.opacity = 1;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      bot.style.transition = "opacity 4s ease";
-      bot.style.opacity = 0
-    }, 6000);
+    if (!prompt) {
+      bot.style.transition = "opacity 1s ease";
+      bot.style.opacity = 1;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        bot.style.transition = "opacity 4s ease";
+        bot.style.opacity = 0
+      }, 6000);
+    }
   }
 
   document.onkeypress = (e) => {
