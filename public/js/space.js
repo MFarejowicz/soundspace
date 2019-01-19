@@ -175,14 +175,6 @@ window.onload = () => {
   }
 }
 
-function generateSpaceId() {
-  let firstPart = (Math.random() * 46656) | 0;
-  let secondPart = (Math.random() * 46656) | 0;
-  firstPart = ('00' + firstPart.toString(36)).slice(-2);
-  secondPart = ('00' + secondPart.toString(36)).slice(-2);
-  return firstPart + secondPart;
-};
-
 socket.on('connect', () => {
   const spacecode = window.location.pathname.slice(7);
   console.log(spacecode);
@@ -191,11 +183,17 @@ socket.on('connect', () => {
   } else if (spacecode.length === 0) {
     socket.emit('join room', 'default');
   }
+  if (document.getElementById('logout')) {
+    // Make post request to track taps
+    axios.post('/api/join')
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 });
 
 socket.on('play sound', (sound) => {
   console.log('received sound ' + sound);
   playSound(sound);
   spawnRandom();
-  // spawnStar();
 });
