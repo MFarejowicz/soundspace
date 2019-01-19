@@ -17,7 +17,6 @@ router.get('/observatory', function(req, res) {
 })
 
 router.get('/space/:space', function(req, res) {
-  req.session.returnTo = req.originalUrl;
   const space = req.params.space;
   // console.log("room: " + space);
   if (space.length === 4) {
