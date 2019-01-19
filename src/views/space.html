@@ -3,7 +3,7 @@
 {% block content %}
   <body class="container">
     <div id="top">
-      <div class="prompt space-prompt">
+      <div id="top-bar" class="prompt space-prompt">
         <div class="share top-container">
           <div class="share-title">
             invite link:
@@ -12,7 +12,9 @@
             localhost:3000/space/{{spacecode}}
           </a>
         </div>
-        <div class="blink top-container" id="prompt-text">press any key to start</div>
+        <div class="top-container" id="prompt-text">
+          <div class="blink">press any key to start</div>
+        </div>
         <div class="record top-container">
           {% if loggedIn %}
           <div>

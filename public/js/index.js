@@ -36,7 +36,7 @@ function appendSpawn(spawnInfo, hue) {
   spawn.setAttribute('class', 'spawn');
   spawn.style.top = `${spawnInfo.y}%`;
   spawn.style.left = `${spawnInfo.x}%`;
-  spawn.style.filter = `hue-rotate(${hue}deg) saturate(3)`;
+  spawn.style.filter = `hue-rotate(${hue}deg)`;
 
   top.appendChild(spawn);
   fadeOutAndRemove(spawn, spawnInfo.time);
@@ -70,6 +70,7 @@ function chooseSpawn() {
 }
 
 window.onload = () => {
+  let timeout;
   let prompt = true;
   let hue = getRandomInt(0, 360);
 
@@ -85,6 +86,19 @@ window.onload = () => {
     .catch((err) => {
       console.log(err);
     });
+  }
+
+  let bot = document.getElementById('bot');
+  document.onmousemove = () => {
+    if (!prompt) {
+      bot.style.transition = "opacity 1s ease";
+      bot.style.opacity = 1;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        bot.style.transition = "opacity 4s ease";
+        bot.style.opacity = 0
+      }, 6000);
+    }
   }
 
   document.onkeypress = (e) => {
@@ -161,6 +175,7 @@ window.onload = () => {
 
     if (prompt) {
       fadeOutAndRemove(document.getElementById('home-prompt'), 2000);
+      setTimeout(() => bot.style.opacity = 0, 6000);
       prompt = false;
     }
 
