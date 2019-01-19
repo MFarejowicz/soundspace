@@ -51,6 +51,22 @@ app.use('/', views);
 app.use('/api', api);
 app.use('/static', express.static('public'));
 
+// Handles 404 errors
+app.use(function(req, res, next) {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// Handles other route errors
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.send({
+    status: err.status,
+    message: err.message,
+  });
+});
+
 io.on('connection', function(socket) {
   socket.on('play sound', (sound) => {
     io.to(socket.room).emit('play sound', sound);

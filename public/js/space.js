@@ -160,7 +160,7 @@ window.onload = () => {
     }
 
     if (prompt) {
-      fadeOutAndRemove(document.getElementById('home-prompt'), 2000);
+      fadeOutAndRemove(document.getElementById('prompt-text'), 2000);
       prompt = false;
     }
 
@@ -182,16 +182,6 @@ function generateSpaceId() {
   secondPart = ('00' + secondPart.toString(36)).slice(-2);
   return firstPart + secondPart;
 };
-
-function createSpace() {
-  axios.post('/api/create')
-  .catch((error) => {
-    console.log(error);
-  });
-
-  const spaceId = generateSpaceId();
-  window.location.href = `${window.location.origin}/space/${spaceId}`;
-}
 
 socket.on('connect', () => {
   const spacecode = window.location.pathname.slice(7);

@@ -3,14 +3,28 @@
 {% block content %}
   <body class="container">
     <div id="top">
-      <div class="prompt" id="home-prompt">
-        <div id="prompt-title">soundspace</div>
-        <div class="blink" id="prompt-text">press any key to start</div>
+      <div class="prompt space-prompt">
+        <div class="share top-container">
+          <div class="share-title">
+            invite link:
+          </div>
+          <a href="localhost:3000/space/{{spacecode}}">
+            localhost:3000/space/{{spacecode}}
+          </a>
+        </div>
+        <div class="blink top-container" id="prompt-text">press any key to start</div>
+        <div class="record top-container">
+          {% if loggedIn %}
+          <div>
+            record
+          </div>
+          {% endif %}
+        </div>
       </div>
     </div>
     <div id="bot">
       <div class="bot-container">
-        <a class="bot-link" id="create" onclick="createSpace()">create space</a>
+        <a class="bot-link" id="leave" href="/">leave space</a>
       </div>
       <div class="bot-container">
         <div id="join-space">
@@ -37,5 +51,5 @@
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/static/js/sound.js"></script>
-  <script src="/static/js/index.js"></script>
+  <script src="/static/js/space.js"></script>
 {% endblock %}
