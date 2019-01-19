@@ -66,7 +66,7 @@ a {
   animation: blink 3s linear infinite;
 }
 
-.star {
+.spawn {
   position: absolute;
 }
 
