@@ -36,7 +36,7 @@ function appendSpawn(spawnInfo, hue) {
   spawn.setAttribute('class', 'spawn');
   spawn.style.top = `${spawnInfo.y}%`;
   spawn.style.left = `${spawnInfo.x}%`;
-  spawn.style.filter = `hue-rotate(${hue}deg) saturate(3)`;
+  spawn.style.filter = `hue-rotate(${hue}deg)`;
 
   top.appendChild(spawn);
   fadeOutAndRemove(spawn, spawnInfo.time);
