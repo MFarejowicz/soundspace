@@ -16,9 +16,9 @@ a {
   color: inherit;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
   color: white;
-  opacity: .7; /* Firefox */
+  opacity: .7;
 }
 
 .container {
@@ -119,6 +119,7 @@ a {
   height: 50px;
   display: flex;
   align-items: center;
+  transition: opacity 4s ease;
 }
 
 .bot-container {
