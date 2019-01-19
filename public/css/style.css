@@ -131,6 +131,45 @@ a {
   outline: none;
 }
 
+/* ABOUT css */
+.about {
+  background-image: url("/static/img/landscape.png");
+}
+
+.about-top {
+  height: 60px;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+#home {
+  margin-right: 10px;
+}
+
+#about-title {
+  font-size: 40px;
+}
+
+.content {
+  width: 70%;
+  margin: auto;
+}
+
+.about-section-title {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+#motive {
+  color: #fafafa;
+}
+
+#authors {
+  margin: 20px 0;
+}
+
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}

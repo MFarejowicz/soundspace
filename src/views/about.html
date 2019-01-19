@@ -1,12 +1,64 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <body>
-    <div style="margin:10px">
-      <a href="/">Home</a>
-      <h1>
-        about
-      </h1>
+  <body class="about">
+    <div class="about-top">
+      <a id="home" href="/"><img src="/static/img/home.png" style="width: 34px"/></a>
+      <h1 id="about-title">about</h1>
+    </div>
+    <div class="content">
+      <div class="about-section" id="motive">
+        <h2 class="about-section-title">motivation</h2>
+        <div>
+          "It's like Patatap but social and collaborative" was the idea that inspired this project. While the
+          audio-visual experience that Patatap provides is neat and novel, we felt there was room for expansion. Patatap relies
+          on the creativity of an individual to produce a result that is appealing. For those that aren't musically
+          inclined, it serves mostly as a stylish soundboard.
+          <br /> <br />
+          We wanted something that was driven by more than just the individual, something that allows for a sort of collaborative creativity.
+          Adding a social aspect was a start, but we quickly realized that technological limitations might mean that attempting to
+          play sounds over a network could lead to synchronicity issues. Rather than trying to perfect the timings, we decided instead
+          to embrace the potential desync and aim for a tool that is more about communication without the use of typical language over a tool
+          that serves as an online music maker.
+          <br /> <br />
+          During ideation, the concept of creating "sound spaces" came up. These would essentially be the "rooms" where friends could come
+          together to tap away and play sounds. We took the theme of "space" to the extreme, using it as the theme for the website and
+          inspiring the visuals that would go with the sounds. As individuals participate, they could begin to light up a space. With the combined
+          output of many individuals, the group could find an even brighter space with beautiful visuals. We hope that people can come together
+          and interact with sound, and maybe find a pleasant tune unintentionally.
+        </div>
+      </div>
+      <div class="about-section" id="authors">
+        <h2 class="about-section-title">authors</h2>
+        <div>
+          Matt Farejowicz and Joon Ko are both juniors at MIT who practice web development in their spare time.
+          Matt is a Math with Computer Science major while Joon is a pure Computer Science major, but the two
+          are united by their appreciation for music, quirky web apps, and big anime tiddies. Joon and Matt
+          wanted to work together on a web.lab project to create something that could be highly interactive and
+          fun for a small crowd.
+        </div>
+      </div>
+      <div class="about-section">
+        <h2 class="about-section-title">attributions</h2>
+        <div>
+          <ul style="margin: 0">
+            <li>
+              inspiration - the wonderful <a style="text-decoration: underline" href="https://patatap.com/">patatap.com</a> served as a starting
+              point for the entire project.
+            </li>
+            <li>
+              visual assets - most were acquired with permission from <a style="text-decoration: underline" href="https://opengameart.org/">opengameart.org</a>, but Matt
+              also worked to create many original assets or edit existing ones.
+            </li>
+            <li>
+              sounds - obtained with permission from various sources, such as _______.
+            </li>
+            <li>
+              infinite web development experience - received from the incredibly wise web.lab staff.
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
 {% endblock %}
