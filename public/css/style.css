@@ -16,6 +16,11 @@ a {
   color: inherit;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: .7; /* Firefox */
+}
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -64,6 +69,46 @@ a {
 .blink {
   opacity: 0;
   animation: blink 3s linear infinite;
+}
+
+.ship-container {
+  position: absolute;
+  top: 75%;
+  left: 70%;
+  animation: move 600s linear infinite;
+  animation-delay: -150s;
+  z-index: 10;
+}
+
+#ship-text {
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#ship-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.ship-container:hover #ship-text {
+  opacity: 1;
 }
 
 .spawn {
@@ -179,4 +224,9 @@ a {
   50% {
     opacity: 1;
   }
+}
+
+@keyframes move {
+  from {top: 100%}
+  to {top: 0%}
 }

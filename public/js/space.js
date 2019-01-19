@@ -14,6 +14,11 @@ function joinPopup() {
   const joinPopup = document.getElementById('join-popup');
   joinPopup.classList.toggle('show');
   joinPopup.classList.toggle('hide');
+
+  const joinInput = document.getElementById('join-input');
+  if (joinPopup.classList.contains('show')) {
+    joinInput.focus();
+  }
 }
 
 function fadeOutAndRemove(el, speed) {
@@ -68,9 +73,23 @@ window.onload = () => {
   let prompt = true;
   let hue = getRandomInt(0, 360);
 
+  let myShip = document.getElementById('my-ship');
+  if (myShip) {
+    myShip.setAttribute('src', `/static/img/ship${getRandomInt(1, 3)}.gif`);
+
+    axios.get('/api/userinfo')
+    .then((res) => {
+      let myShipText = document.getElementById('ship-text');
+      myShipText.innerText = `${res.data.name}\n\nTaps: ${res.data.taps}`
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   document.onkeypress = (e) => {
     const joinInput = document.getElementById('join-input');
-    if (!(joinInput === document.activeElement)) {
+    if (!(joinInput === document.activeElement)) { //May want to investigate this, seems to stop sounds sometimes
       const spawnInfo = chooseSpawn();
 
       switch (e.keyCode) {
@@ -149,6 +168,10 @@ window.onload = () => {
     if (document.getElementById('logout')) {
       // Make post request to track taps
       axios.post('/api/tap')
+      .then((res) => {
+        let myShipText = document.getElementById('ship-text');
+        myShipText.innerText = `${res.data.name}\n\nTaps: ${res.data.taps}`
+      })
       .catch((error) => {
         console.log(error);
       });

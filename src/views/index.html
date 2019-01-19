@@ -7,6 +7,12 @@
         <div id="prompt-title">soundspace</div>
         <div class="blink" id="prompt-text">press any key to start</div>
       </div>
+      {% if loggedIn %}
+      <div class="ship-container">
+        <div id="ship-text">Testing lmao</div>
+        <img id="my-ship" />
+      </div>
+      {% endif %}
     </div>
     <div id="bot">
       <div class="bot-container">
@@ -15,7 +21,7 @@
       <div class="bot-container">
         <div id="join-space">
           <span id="join-popup" class="popup hide">
-            <input id="join-input" type="text" value="code" maxlength="4">
+            <input id="join-input" type="text" placeholder="code" maxlength="4">
           </span>
           <a class="bot-link" id="join" onClick="joinPopup()">join space</a>
         </div>
