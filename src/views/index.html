@@ -8,20 +8,30 @@
       </div>
     </div>
     <div id="bot">
-      <a class="bot-link" id="about" href="/about">about</a>
-      <a class="bot-link" id="create" onclick="createSpace()">create space</a>
-      <div id="join-space">
-        <span id="join-popup" class="popup hide">
-          <input id="join-input" type="text" value="code" maxlength="4">
-        </span>
-        <a class="bot-link" id="join" onClick="joinPopup()">join space</a>
+      <div class="bot-container">
+        <a class="bot-link" id="create" onclick="createSpace()">create space</a>
       </div>
-      {% if loggedIn %}
-      <a class="bot-link" id="logout" href="/logout">logout</a>
-      {% else %}
-      <a class="bot-link" id="login" href="/auth/google">login</a>
-      {% endif %}
-      <a class="bot-link" id="obs" href="/observatory">observatory</a>
+      <div class="bot-container">
+        <div id="join-space">
+          <span id="join-popup" class="popup hide">
+            <input id="join-input" type="text" value="code" maxlength="4">
+          </span>
+          <a class="bot-link" id="join" onClick="joinPopup()">join space</a>
+        </div>
+      </div>
+      <div class="bot-container">
+        <a class="bot-link" id="about" href="/about">about</a>
+      </div>
+      <div class="bot-container">
+        {% if loggedIn %}
+        <a class="bot-link" id="logout" href="/logout">logout</a>
+        {% else %}
+        <a class="bot-link" id="login" href="/auth/google">login</a>
+        {% endif %}
+      </div>
+      <div class="bot-container">
+        <a class="bot-link" id="obs" href="/observatory">observatory</a>
+      </div>
     </div>
   </body>
   <script src="/socket.io/socket.io.js"></script>
