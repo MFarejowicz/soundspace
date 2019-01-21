@@ -83,7 +83,7 @@ function chooseSpawn() {
     fadeTime = 0;
     num = 1;
     x = getRandom(0, 70);
-    y = getRandom(0, 70);
+    y = getRandom(0, 50);
     scale = getRandom(1, 2);
   } else {
     type = 'galaxy';

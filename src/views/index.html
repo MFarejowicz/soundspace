@@ -9,7 +9,7 @@
       </div>
       {% if loggedIn %}
       <div class="ship-container">
-        <div id="ship-text">Testing lmao</div>
+        <div id="ship-text"></div>
         <img id="my-ship" />
       </div>
       {% endif %}
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="bot-container">
-        <a class="bot-link" id="about" href="/about">about</a>
+        <a class="bot-link" id="about" onClick="slideUp()">about</a>
       </div>
       <div class="bot-container">
         {% if loggedIn %}
@@ -43,6 +43,7 @@
         </div>
       </div>
     </div>
+    <div id="hidden-about" class="slide"></div>
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/static/js/sound.js"></script>

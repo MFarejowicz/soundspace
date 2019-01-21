@@ -1,5 +1,17 @@
 const socket = io();
 
+function slideUp() {
+  let slide = document.getElementById('hidden-about');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideUp');
+  top.classList.toggle('slideUp');
+  bot.classList.toggle('slideUp');
+  setTimeout(() => {
+    window.location.href = '/about';
+  }, 1000);
+}
+
 function getRandom(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -83,7 +95,7 @@ function chooseSpawn() {
     fadeTime = 0;
     num = 1;
     x = getRandom(0, 70);
-    y = getRandom(0, 70);
+    y = getRandom(0, 50);
     scale = getRandom(1, 2);
   } else {
     type = 'galaxy';
@@ -120,11 +132,11 @@ window.onload = () => {
   let bot = document.getElementById('bot');
   document.onmousemove = () => {
     if (!prompt) {
-      bot.style.transition = "opacity 1s ease";
+      bot.style.transition = "opacity 1s ease, transform 1s ease-in-out";
       bot.style.opacity = 1;
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        bot.style.transition = "opacity 4s ease";
+        bot.style.transition = "opacity 4s ease, transform 1s ease-in-out";
         bot.style.opacity = 0
       }, 6000);
     }

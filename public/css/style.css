@@ -4,6 +4,8 @@ html, body {
   font-family: "Lato", sans-serif;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -153,7 +155,7 @@ a {
   height: 50px;
   display: flex;
   align-items: center;
-  transition: opacity 4s ease;
+  transition: opacity 4s ease, transform 1s ease-in-out;
 }
 
 .bot-container {
@@ -269,6 +271,33 @@ a {
 /* Error page CSS */
 #error {
   margin: 20px;
+}
+
+/* Slides */
+#hidden-about {
+  background-image: linear-gradient(black, #19227b, #4393ef, #5eaff5, #79c9fa);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 100%;
+}
+
+#hidden-home {
+  background-image: linear-gradient(black, #080810, #0f1021, #141735, #19227b);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  bottom: 99.5%;
+}
+
+.slideUp {
+  transition: transform 1s ease-in-out;
+  transform: translateY(-100vh);
+}
+
+.slideDown {
+  transition: transform 1s ease-in-out;
+  transform: translateY(100vh);
 }
 
 @keyframes fadeIn {
