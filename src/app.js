@@ -61,10 +61,7 @@ app.use(function(req, res, next) {
 // Handles other route errors
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.send({
-    status: err.status,
-    message: err.message,
-  });
+  res.render('error.html', { status: err.status, message: err.message });
 });
 
 io.on('connection', function(socket) {

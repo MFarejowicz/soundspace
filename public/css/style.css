@@ -183,25 +183,32 @@ a {
 
 /* ABOUT css */
 .about {
-  background-image: url("/static/img/landscape.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.about-top {
-  height: 60px;
-  padding-left: 20px;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  color: white;
+  flex-direction: column;
 }
 
-#home {
-  margin-right: 10px;
+#about-top {
+  background-color: #79c9fa;
+  flex: 1;
 }
 
 #about-title {
   font-size: 40px;
+  color: #efefef;
+}
+
+.about-head {
+  height: 80px;
+  background-image: url('/static/img/landscape-top.png');
+  background-size: 100% 100%;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.about-head-container {
+  flex: 1;
 }
 
 .content {
@@ -214,12 +221,13 @@ a {
   margin-bottom: 5px;
 }
 
-#motive {
-  color: #fafafa;
-}
-
 #authors {
   margin: 20px 0;
+}
+
+/* Error page CSS */
+#error {
+  margin: 20px;
 }
 
 @keyframes fadeIn {
