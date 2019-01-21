@@ -84,7 +84,11 @@ a {
   z-index: 10;
 }
 
-#ship-text {
+.obs-container, .record-container {
+  position: relative;
+}
+
+#ship-text, #obs-soon {
   width: 120px;
   background-color: #555;
   color: #fff;
@@ -100,7 +104,7 @@ a {
   transition: opacity 0.5s;
 }
 
-#ship-text::after {
+#ship-text::after, #obs-soon::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -111,7 +115,33 @@ a {
   border-color: #555 transparent transparent transparent;
 }
 
-.ship-container:hover #ship-text {
+#record-soon {
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -25%;
+  right: 128%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#record-soon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #555;
+}
+
+.ship-container:hover #ship-text, .obs-container:hover #obs-soon, .record-container:hover #record-soon {
   opacity: 1;
 }
 
@@ -145,7 +175,7 @@ a {
 .popup {
   visibility: hidden;
   width: 100px;
-  background-color: green;
+  background-color: #555;
   color: white;
   text-align: center;
   border-radius: 6px;
@@ -168,13 +198,24 @@ a {
 #join-input {
   width: 100%;
   padding: 4px 0;
-  background-color: green;
+  background-color: #555;
   color: white;
   text-decoration: none;
   border: none;
   font-family: "Lato", sans-serif;
   font-size: 16px;
   text-align: center;
+}
+
+#join-popup::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
 }
 
 #join-input:focus {
@@ -213,7 +254,7 @@ a {
 
 .content {
   width: 70%;
-  margin: auto;
+  margin: 30px auto;
 }
 
 .about-section-title {
