@@ -35,7 +35,7 @@
     </div>
     <div id="bot">
       <div class="bot-container">
-        <a class="bot-link" id="leave" href="/">leave space</a>
+        <a class="bot-link" id="leave" onclick="slideLeft()">leave space</a>
       </div>
       <div class="bot-container">
         <div id="join-space">
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="bot-container">
-        <a class="bot-link" id="about" href="/about">about</a>
+        <a class="bot-link" id="about" onclick="slideUp()">about</a>
       </div>
       <div class="bot-container">
         {% if loggedIn %}
@@ -62,6 +62,8 @@
         </div>
       </div>
     </div>
+    <div id="hidden-about"></div>
+    <div id="hidden-leave"></div>
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/static/js/sound.js"></script>

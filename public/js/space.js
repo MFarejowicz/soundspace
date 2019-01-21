@@ -1,5 +1,29 @@
 const socket = io();
 
+function slideUp() {
+  let slide = document.getElementById('hidden-about');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideUp');
+  top.classList.toggle('slideUp');
+  bot.classList.toggle('slideUp');
+  setTimeout(() => {
+    window.location.href = '/about';
+  }, 1000);
+}
+
+function slideLeft() {
+  let slide = document.getElementById('hidden-leave');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideLeft');
+  top.classList.toggle('slideLeft');
+  bot.classList.toggle('slideLeft');
+  setTimeout(() => {
+    window.location.href = '/';
+  }, 1000);
+}
+
 function getRandom(min, max) {
   return Math.random() * (max - min) + min;
 }

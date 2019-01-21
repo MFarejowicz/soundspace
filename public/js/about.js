@@ -1,3 +1,11 @@
+function back(){
+  if (history.length === 1) {
+    window.location = "/";
+  } else {
+    history.back();
+  }
+}
+
 function slideDown() {
   let slide = document.getElementById('hidden-home');
   let top = document.getElementById('about-top');
@@ -6,6 +14,6 @@ function slideDown() {
   top.classList.toggle('slideDown');
   bot.classList.toggle('slideDown');
   setTimeout(() => {
-    window.location.href = '/';
+    back();
   }, 1000);
 }

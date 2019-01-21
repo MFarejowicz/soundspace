@@ -250,7 +250,16 @@ function createSpace() {
   });
 
   const spaceId = generateSpaceId();
-  window.location.href = `${window.location.origin}/space/${spaceId}`;
+
+  let slide = document.getElementById('hidden-space');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideRight');
+  top.classList.toggle('slideRight');
+  bot.classList.toggle('slideRight');
+  setTimeout(() => {
+    window.location.href = `/space/${spaceId}`;
+  }, 1000);
 }
 
 socket.on('connect', () => {
