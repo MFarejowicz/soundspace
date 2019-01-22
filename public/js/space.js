@@ -9,7 +9,7 @@ function slideUp() {
   bot.classList.toggle('slideUp');
   setTimeout(() => {
     window.location.href = '/about';
-  }, 1000);
+  }, 950);
 }
 
 function slideLeft() {
@@ -21,7 +21,7 @@ function slideLeft() {
   bot.classList.toggle('slideLeft');
   setTimeout(() => {
     window.location.href = '/';
-  }, 1000);
+  }, 950);
 }
 
 function getRandom(min, max) {

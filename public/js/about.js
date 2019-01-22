@@ -15,5 +15,5 @@ function slideDown() {
   bot.classList.toggle('slideDown');
   setTimeout(() => {
     back();
-  }, 1000);
+  }, 950);
 }

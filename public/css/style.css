@@ -278,7 +278,8 @@ a {
 
 /* Slides */
 #hidden-about {
-  background-image: linear-gradient(black, #19227b, #4393ef, #5eaff5, #79c9fa);
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   position: absolute;
@@ -302,7 +303,7 @@ a {
 }
 
 #hidden-home {
-  background-image: linear-gradient(black, #080810, #0f1021, #141735, #19227b);
+  background-color: black;
   width: 100%;
   height: 100vh;
   position: absolute;

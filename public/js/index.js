@@ -9,7 +9,7 @@ function slideUp() {
   bot.classList.toggle('slideUp');
   setTimeout(() => {
     window.location.href = '/about';
-  }, 1000);
+  }, 950);
 }
 
 function getRandom(min, max) {
@@ -259,7 +259,7 @@ function createSpace() {
   bot.classList.toggle('slideRight');
   setTimeout(() => {
     window.location.href = `/space/${spaceId}`;
-  }, 1000);
+  }, 950);
 }
 
 socket.on('connect', () => {
