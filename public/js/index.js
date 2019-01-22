@@ -70,7 +70,7 @@ function chooseSpawn() {
     upTime = 5000;
     fadeTime = 5000;
     num = getRandomInt(1, 3);
-    x = getRandom(0, 90);
+    x = getRandom(0, 98);
     y = getRandom(0, 90);
     scale = getRandom(.6, 1);
   } else if (rand < 0.990) {
@@ -78,7 +78,7 @@ function chooseSpawn() {
     upTime = 10000;
     fadeTime = 5000;
     num = getRandomInt(1, 5);
-    x = getRandom(0, 80);
+    x = getRandom(0, 90);
     y = getRandom(0, 80);
     scale = getRandom(.8, 1.1);
   } else if (rand < 0.995) {
@@ -86,7 +86,7 @@ function chooseSpawn() {
     upTime = 20000;
     fadeTime = 8000;
     num = 1;
-    x = getRandom(0, 70);
+    x = getRandom(0, 80);
     y = getRandom(0, 70);
     scale = getRandom(.8, 1.2);
   } else if (rand < 0.998) {
@@ -102,9 +102,9 @@ function chooseSpawn() {
     upTime = 20000;
     fadeTime = 10000;
     num = 1;
-    x = getRandom(0, 60);
+    x = getRandom(0, 50);
     y = getRandom(0, 70);
-    scale = getRandom(.8, 1.1);
+    scale = getRandom(.7, 1);
   }
 
   return { type, upTime, fadeTime, num, x, y, scale }
