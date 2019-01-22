@@ -166,28 +166,82 @@ window.onload = () => {
 
       switch (e.keyCode) {
         case 97: // a
-          socket.emit('play sound', 'CsM7', spawnInfo, hue);
+          socket.emit('handle sound', 'CsM7', spawnInfo, hue);
+          break;
+        case 98: // b
+          socket.emit('handle sound', 'Ebeep', spawnInfo, hue);
+          break;
+        case 99: // c
+          socket.emit('handle sound', 'CM', spawnInfo, hue);
+          break;
+        case 100: // d
+          socket.emit('handle sound', 'FM', spawnInfo, hue);
+          break;
+        case 101: // e
+          socket.emit('handle sound', 'Am', spawnInfo, hue);
+          break;
+        case 102: // f
+          socket.emit('handle sound', 'Abeep', spawnInfo, hue);
+          break;
+        case 103: // g
+          socket.emit('handle sound', 'Gsbeep', spawnInfo, hue);
+          break;
+        case 104: // h
+          socket.emit('handle sound', 'Gbeep', spawnInfo, hue);
+          break;
+        case 105: // i
+          socket.emit('handle sound', 'timer', spawnInfo, hue);
+          break;
+        case 106: // j
+          socket.emit('handle sound', 'Fsbeep', spawnInfo, hue);
+          break;
+        case 107: // k
+          socket.emit('handle sound', 'snare', spawnInfo, hue);
+          break;
+        case 108: // l
+          socket.emit('handle sound', 'bass', spawnInfo, hue);
+          break;
+        case 109: // m
+          socket.emit('handle sound', 'Dbeep', spawnInfo, hue);
+          break;
+        case 110: // n
+          socket.emit('handle sound', 'Efbeep', spawnInfo, hue);
           break;
         case 111: // o
-          socket.emit('play sound', 'drumkick', spawnInfo, hue);
+          socket.emit('handle sound', 'hihat', spawnInfo, hue);
           break;
         case 112: // p
-          socket.emit('play sound', 'pew', spawnInfo, hue);
+          socket.emit('handle sound', 'pew', spawnInfo, hue);
           break;
         case 113: // q
-          socket.emit('play sound', 'GsM7', spawnInfo, hue);
+          socket.emit('handle sound', 'GsM7', spawnInfo, hue);
+          break;
+        case 114: // r
+          socket.emit('handle sound', 'Cbeep', spawnInfo, hue);
           break;
         case 115: // s
-          socket.emit('play sound', 'M2', spawnInfo, hue);
+          socket.emit('handle sound', 'M2', spawnInfo, hue);
+          break;
+        case 116: // t
+          socket.emit('handle sound', 'Bbeep', spawnInfo, hue);
+          break;
+        case 117: // u
+          socket.emit('handle sound', 'Alowbeep', spawnInfo, hue);
+          break;
+        case 118: // v
+          socket.emit('handle sound', 'Fbeep', spawnInfo, hue);
           break;
         case 119: // w
-          socket.emit('play sound', 'M1', spawnInfo, hue);
+          socket.emit('handle sound', 'M1', spawnInfo, hue);
           break;
         case 120: // x
-          socket.emit('play sound', 'M3', spawnInfo, hue);
+          socket.emit('handle sound', 'M3', spawnInfo, hue);
+          break;
+        case 121: // y
+          socket.emit('handle sound', 'Bfbeep', spawnInfo, hue);
           break;
         case 122: // z
-          socket.emit('play sound', 'FsM7', spawnInfo, hue);
+          socket.emit('handle sound', 'FsM7', spawnInfo, hue);
           break;
         default:
           console.log(e.keyCode);
@@ -242,7 +296,7 @@ socket.on('connect', () => {
   }
 });
 
-socket.on('play sound', (sound, spawn, hue) => {
+socket.on('handle sound', (sound, spawn, hue) => {
   console.log(`received sound ${sound}`);
   playSound(sound);
   appendSpawn(spawn, hue);

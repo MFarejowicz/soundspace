@@ -66,8 +66,8 @@ app.use(function(err, req, res, next) {
 });
 
 io.on('connection', function(socket) {
-  socket.on('play sound', (sound, spawn, hue) => {
-    io.to(socket.room).emit('play sound', sound, spawn, hue);
+  socket.on('handle sound', (sound, spawn, hue) => {
+    io.to(socket.room).emit('handle sound', sound, spawn, hue);
   });
 
   socket.on('join room', (room) => {

@@ -25,6 +25,63 @@ var sounds = {
   M3: {
     url: "/static/audio/M3.mp3"
   },
+  FM: {
+    url: "/static/audio/FM.mp3"
+  },
+  Am: {
+    url: "/static/audio/Am.mp3"
+  },
+  CM: {
+    url: "/static/audio/CM.mp3"
+  },
+  Cbeep: {
+    url: "/static/audio/Cbeep.mp3"
+  },
+  Abeep: {
+    url: "/static/audio/Abeep.mp3"
+  },
+  Fbeep: {
+    url: "/static/audio/Fbeep.mp3"
+  },
+  Bbeep: {
+    url: "/static/audio/Bbeep.mp3"
+  },
+  Gsbeep: {
+    url: "/static/audio/Gsbeep.mp3"
+  },
+  Ebeep: {
+    url: "/static/audio/Ebeep.mp3"
+  },
+  Bfbeep: {
+    url: "/static/audio/Bfbeep.mp3"
+  },
+  Gbeep: {
+    url: "/static/audio/Gbeep.mp3"
+  },
+  Efbeep: {
+    url: "/static/audio/Efbeep.mp3"
+  },
+  Alowbeep: {
+    url: "/static/audio/Alowbeep.mp3"
+  },
+  Fsbeep: {
+    url: "/static/audio/Fsbeep.mp3"
+  },
+  Dbeep: {
+    url: "/static/audio/Dbeep.mp3"
+  },
+  hihat: {
+    url: "/static/audio/hihat.wav"
+  },
+  bass: {
+    url: "/static/audio/bass.wav"
+  },
+  snare: {
+    url: "/static/audio/snare.wav"
+  },
+  timer: {
+    url: "/static/audio/timer.mp3"
+  }
 };
 
 for (let key in sounds) {
