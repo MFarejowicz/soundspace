@@ -1,62 +1,29 @@
 var context = new AudioContext();
 
 var sounds = {
-  h1: {
-    url: "/static/audio/h1.mp3"
-  },
-  h2: {
-    url: "/static/audio/h2.mp3"
-  },
-  h3: {
-    url: "/static/audio/h3.mp3"
-  },
-  h4: {
-    url: "/static/audio/h4.mp3"
-  },
-  C4: {
-    url: "/static/audio/C4.mp3"
-  },
-  E4: {
-    url: "/static/audio/E4.mp3"
-  },
-  G4: {
-    url: "/static/audio/G4.mp3"
-  },
-  B4: {
-    url: "/static/audio/B4.mp3"
-  },
-  neosweep: {
-    url: "/static/audio/neo-sweep.wav"
-  },
   pew: {
     url: "/static/audio/pew.wav"
   },
-  bass: {
-    url: "/static/audio/bass.wav"
+  FsM7: {
+    url: "/static/audio/FsM7.mp3"
   },
-  chipkick: {
-    url: "/static/audio/chipkick.wav"
+  CsM7: {
+    url: "/static/audio/CsM7.mp3"
   },
-  piano5: {
-    url: "/static/audio/piano5.mp3"
+  GsM7: {
+    url: "/static/audio/GsM7.mp3"
   },
-  xylochord: {
-    url: "/static/audio/xylochord.wav"
+  drumkick: {
+    url: "/static/audio/drumkick.wav"
   },
-  jazzy1: {
-    url: "/static/audio/jazzy1.mp3"
+  M1: {
+    url: "/static/audio/M1.mp3"
   },
-  warm1: {
-    url: "/static/audio/warm1.mp3"
+  M2: {
+    url: "/static/audio/M2.mp3"
   },
-  pluckFs5: {
-    url: "/static/audio/pluckFs5.mp3"
-  },
-  pluckGs5: {
-    url: "/static/audio/pluckGs5.mp3"
-  },
-  pluckAs5: {
-    url: "/static/audio/pluckAs5.mp3"
+  M3: {
+    url: "/static/audio/M3.mp3"
   },
 };
 

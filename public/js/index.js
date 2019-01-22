@@ -107,62 +107,29 @@ window.onload = () => {
       const spawnInfo = chooseSpawn();
 
       switch (e.keyCode) {
-        case 113:
-          socket.emit('play sound', 'h1', spawnInfo, hue);
+        case 97: // a
+          socket.emit('play sound', 'CsM7', spawnInfo, hue);
           break;
-        case 119:
-          socket.emit('play sound', 'h2', spawnInfo, hue);
+        case 111: // o
+          socket.emit('play sound', 'drumkick', spawnInfo, hue);
           break;
-        case 101:
-          socket.emit('play sound', 'h3', spawnInfo, hue);
-          break;
-        case 114:
-          socket.emit('play sound', 'h4', spawnInfo, hue);
-          break;
-        case 122:
-          socket.emit('play sound', 'C4', spawnInfo, hue);
-          break;
-        case 120:
-          socket.emit('play sound', 'E4', spawnInfo, hue);
-          break;
-        case 99:
-          socket.emit('play sound', 'G4', spawnInfo, hue);
-          break;
-        case 118:
-          socket.emit('play sound', 'B4', spawnInfo, hue);
-          break;
-        case 108:
-          socket.emit('play sound', 'neosweep', spawnInfo, hue);
-          break;
-        case 97:
+        case 112: // p
           socket.emit('play sound', 'pew', spawnInfo, hue);
           break;
-        case 112:
-          socket.emit('play sound', 'bass', spawnInfo, hue);
+        case 113: // q
+          socket.emit('play sound', 'GsM7', spawnInfo, hue);
           break;
-        case 111:
-          socket.emit('play sound', 'chipkick', spawnInfo, hue);
+        case 115: // s
+          socket.emit('play sound', 'M2', spawnInfo, hue);
           break;
-        case 109:
-          socket.emit('play sound', 'piano5', spawnInfo, hue);
+        case 119: // w
+          socket.emit('play sound', 'M1', spawnInfo, hue);
           break;
-        case 110:
-          socket.emit('play sound', 'xylochord', spawnInfo, hue);
+        case 120: // x
+          socket.emit('play sound', 'M3', spawnInfo, hue);
           break;
-        case 115:
-          socket.emit('play sound', 'jazzy1', spawnInfo, hue);
-          break;
-        case 107:
-          socket.emit('play sound', 'warm1', spawnInfo, hue);
-          break;
-        case 102:
-          socket.emit('play sound', 'pluckFs5', spawnInfo, hue);
-          break;
-        case 103:
-          socket.emit('play sound', 'pluckGs5', spawnInfo, hue);
-          break;
-        case 104:
-          socket.emit('play sound', 'pluckAs5', spawnInfo, hue);
+        case 122: // z
+          socket.emit('play sound', 'FsM7', spawnInfo, hue);
           break;
         default:
           console.log(e.keyCode);
