@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const { mongoCredentials } = require('./credentials');
 
 // set up mongoDB connection
-const mongoURL = mongoCredentials.url;
+const mongoURL = process.env.ATLAS_SRV;
 const options = {
   useNewUrlParser: true
 };
