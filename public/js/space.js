@@ -145,15 +145,15 @@ window.onload = () => {
   let topBar = document.getElementById('top-bar');
   document.onmousemove = () => {
     if (!prompt) {
-      bot.style.transition = "opacity 1s ease";
+      bot.style.transition = "opacity 1s ease, transform 1s ease-in-out";
       bot.style.opacity = 1;
-      topBar.style.transition = "opacity 1s ease";
+      topBar.style.transition = "opacity 1s ease, transform 1s ease-in-out";
       topBar.style.opacity = 1;
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        bot.style.transition = "opacity 4s ease";
+        bot.style.transition = "opacity 4s ease, transform 1s ease-in-out";
         bot.style.opacity = 0
-        topBar.style.transition = "opacity 4s ease";
+        topBar.style.transition = "opacity 4s ease, transform 1s ease-in-out";
         topBar.style.opacity = 0
       }, 5000);
     }
@@ -236,7 +236,7 @@ window.onload = () => {
       setTimeout(() => {
         bot.style.opacity = 0;
         topBar.style.opacity = 0;
-      }, 5000);
+      }, 6000);
       prompt = false;
     }
 

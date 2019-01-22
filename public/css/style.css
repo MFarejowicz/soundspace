@@ -33,7 +33,7 @@ a {
 
 #top {
   flex: 1;
-  animation: fadeIn .8s ease-in-out forwards;
+  animation: fadeIn .8s ease-in-out 1;
 }
 
 #top-bar {
@@ -156,7 +156,7 @@ a {
   height: 50px;
   display: flex;
   align-items: center;
-  animation: fadeIn .8s ease-in-out forwards;
+  animation: fadeIn .8s ease-in-out 1;
   transition: opacity 4s ease, transform 1s ease-in-out;
 }
 
@@ -259,7 +259,7 @@ a {
 .content {
   width: 70%;
   margin: 30px auto;
-  animation: fadeIn .8s ease-in-out forwards;
+  animation: fadeIn .8s ease-in-out 1;
 }
 
 .about-section-title {
