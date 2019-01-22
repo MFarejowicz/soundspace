@@ -1,5 +1,17 @@
 const socket = io();
 
+function slideUp() {
+  let slide = document.getElementById('hidden-about');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideUp');
+  top.classList.toggle('slideUp');
+  bot.classList.toggle('slideUp');
+  setTimeout(() => {
+    window.location.href = '/about';
+  }, 950);
+}
+
 function getRandom(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -21,52 +33,81 @@ function joinPopup() {
   }
 }
 
-function fadeOutAndRemove(el, speed) {
-  const seconds = speed / 1000;
+function fadeOutAndRemove(el, removeAfter, removeSpeed) {
+  const seconds = removeSpeed / 1000;
   el.style.transition = `opacity ${seconds}s ease`;
-  setTimeout(() => el.style.opacity = 0, 100);
-  setTimeout(() => el.parentNode.removeChild(el), speed);
+  setTimeout(() => el.style.opacity = 0, removeAfter);
+  setTimeout(() => el.parentNode.removeChild(el), removeAfter+removeSpeed);
 }
 
 function appendSpawn(spawnInfo, hue) {
   let top = document.getElementById('top');
   let spawn = document.createElement('img');
 
-  spawn.setAttribute('src', `/static/img/${spawnInfo.type}${spawnInfo.num}.png`);
+  if (spawnInfo.type === 'meteor') {
+    // Needed because a meteor is a gif, not a png.
+    // Date needed at end to get fresh gif instead of existing one.
+    spawn.setAttribute('src', `/static/img/${spawnInfo.type}${spawnInfo.num}.gif?x=${Date.now()}`);
+  } else {
+    spawn.setAttribute('src', `/static/img/${spawnInfo.type}${spawnInfo.num}.png`);
+  }
   spawn.setAttribute('class', 'spawn');
   spawn.style.top = `${spawnInfo.y}%`;
   spawn.style.left = `${spawnInfo.x}%`;
   spawn.style.filter = `hue-rotate(${hue}deg)`;
+  spawn.style.transform = `scale(${spawnInfo.scale}, ${spawnInfo.scale})`;
 
   top.appendChild(spawn);
-  fadeOutAndRemove(spawn, spawnInfo.time);
+  fadeOutAndRemove(spawn, spawnInfo.upTime, spawnInfo.fadeTime);
 }
 
 function chooseSpawn() {
   let rand = Math.random();
-  let type, time, num, x, y;
+  let type, upTime, fadeTime, num, x, y, scale;
 
   if (rand < 0.98) {
     type = 'star';
-    time = 4000;
+    upTime = 5000;
+    fadeTime = 5000;
     num = getRandomInt(1, 3);
     x = getRandom(0, 90);
     y = getRandom(0, 90);
-  } else if (rand < 0.995) {
+    scale = getRandom(.6, 1);
+  } else if (rand < 0.990) {
     type = 'planet';
-    time = 10000;
+    upTime = 10000;
+    fadeTime = 5000;
     num = getRandomInt(1, 5);
     x = getRandom(0, 80);
     y = getRandom(0, 80);
-  } else {
+    scale = getRandom(.8, 1.1);
+  } else if (rand < 0.995) {
     type = 'sun';
-    time = 20000;
+    upTime = 20000;
+    fadeTime = 8000;
     num = 1;
     x = getRandom(0, 70);
     y = getRandom(0, 70);
+    scale = getRandom(.8, 1.2);
+  } else if (rand < 0.998) {
+    type = 'meteor';
+    upTime = 1800;
+    fadeTime = 0;
+    num = 1;
+    x = getRandom(0, 70);
+    y = getRandom(0, 50);
+    scale = getRandom(1, 2);
+  } else {
+    type = 'galaxy';
+    upTime = 20000;
+    fadeTime = 10000;
+    num = 1;
+    x = getRandom(0, 60);
+    y = getRandom(0, 70);
+    scale = getRandom(.8, 1.1);
   }
 
-  return { type, time, num, x, y }
+  return { type, upTime, fadeTime, num, x, y, scale }
 }
 
 window.onload = () => {
@@ -91,11 +132,11 @@ window.onload = () => {
   let bot = document.getElementById('bot');
   document.onmousemove = () => {
     if (!prompt) {
-      bot.style.transition = "opacity 1s ease";
+      bot.style.transition = "opacity 1s ease, transform 1s ease-in-out";
       bot.style.opacity = 1;
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        bot.style.transition = "opacity 4s ease";
+        bot.style.transition = "opacity 4s ease, transform 1s ease-in-out";
         bot.style.opacity = 0
       }, 6000);
     }
@@ -141,7 +182,7 @@ window.onload = () => {
     }
 
     if (prompt) {
-      fadeOutAndRemove(document.getElementById('home-prompt'), 2000);
+      fadeOutAndRemove(document.getElementById('home-prompt'), 10, 2000);
       setTimeout(() => bot.style.opacity = 0, 6000);
       prompt = false;
     }
@@ -176,7 +217,16 @@ function createSpace() {
   });
 
   const spaceId = generateSpaceId();
-  window.location.href = `${window.location.origin}/space/${spaceId}`;
+
+  let slide = document.getElementById('hidden-space');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideRight');
+  top.classList.toggle('slideRight');
+  bot.classList.toggle('slideRight');
+  setTimeout(() => {
+    window.location.href = `/space/${spaceId}`;
+  }, 950);
 }
 
 socket.on('connect', () => {

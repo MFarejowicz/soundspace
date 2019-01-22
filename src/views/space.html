@@ -17,8 +17,11 @@
         </div>
         <div class="record top-container">
           {% if loggedIn %}
-          <div>
-            record
+          <div class="record-container">
+            <div id="record-soon">coming soon</div>
+            <div>
+              record
+            </div>
           </div>
           {% endif %}
         </div>
@@ -32,7 +35,7 @@
     </div>
     <div id="bot">
       <div class="bot-container">
-        <a class="bot-link" id="leave" href="/">leave space</a>
+        <a class="bot-link" id="leave" onclick="slideLeft()">leave space</a>
       </div>
       <div class="bot-container">
         <div id="join-space">
@@ -43,7 +46,7 @@
         </div>
       </div>
       <div class="bot-container">
-        <a class="bot-link" id="about" href="/about">about</a>
+        <a class="bot-link" id="about" onclick="slideUp()">about</a>
       </div>
       <div class="bot-container">
         {% if loggedIn %}
@@ -53,9 +56,20 @@
         {% endif %}
       </div>
       <div class="bot-container">
-        <a class="bot-link" id="obs" href="/observatory">observatory</a>
+        <div class="obs-container">
+          <div id="obs-soon">coming soon</div>
+          <a class="bot-link" id="obs">observatory</a>
+        </div>
       </div>
     </div>
+    <div id="hidden-about">
+      <div id="about-top">
+        <div class="about-head">
+        </div>
+      </div>
+      <img id="about-bot" src="/static/img/landscape-bot.png" style="width:100%"/>
+    </div>
+    <div id="hidden-leave"></div>
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/static/js/sound.js"></script>

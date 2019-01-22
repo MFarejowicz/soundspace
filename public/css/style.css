@@ -4,6 +4,8 @@ html, body {
   font-family: "Lato", sans-serif;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,6 +33,7 @@ a {
 
 #top {
   flex: 1;
+  animation: fadeIn .8s ease-in-out 1;
 }
 
 #top-bar {
@@ -84,7 +87,11 @@ a {
   z-index: 10;
 }
 
-#ship-text {
+.obs-container, .record-container {
+  position: relative;
+}
+
+#ship-text, #obs-soon {
   width: 120px;
   background-color: #555;
   color: #fff;
@@ -100,7 +107,7 @@ a {
   transition: opacity 0.5s;
 }
 
-#ship-text::after {
+#ship-text::after, #obs-soon::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -111,7 +118,33 @@ a {
   border-color: #555 transparent transparent transparent;
 }
 
-.ship-container:hover #ship-text {
+#record-soon {
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -25%;
+  right: 128%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#record-soon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #555;
+}
+
+.ship-container:hover #ship-text, .obs-container:hover #obs-soon, .record-container:hover #record-soon {
   opacity: 1;
 }
 
@@ -123,7 +156,8 @@ a {
   height: 50px;
   display: flex;
   align-items: center;
-  transition: opacity 4s ease;
+  animation: fadeIn .8s ease-in-out 1;
+  transition: opacity 4s ease, transform 1s ease-in-out;
 }
 
 .bot-container {
@@ -145,7 +179,7 @@ a {
 .popup {
   visibility: hidden;
   width: 100px;
-  background-color: green;
+  background-color: #555;
   color: white;
   text-align: center;
   border-radius: 6px;
@@ -168,13 +202,24 @@ a {
 #join-input {
   width: 100%;
   padding: 4px 0;
-  background-color: green;
+  background-color: #555;
   color: white;
   text-decoration: none;
   border: none;
   font-family: "Lato", sans-serif;
   font-size: 16px;
   text-align: center;
+}
+
+#join-popup::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
 }
 
 #join-input:focus {
@@ -213,7 +258,8 @@ a {
 
 .content {
   width: 70%;
-  margin: auto;
+  margin: 30px auto;
+  animation: fadeIn .8s ease-in-out 1;
 }
 
 .about-section-title {
@@ -228,6 +274,60 @@ a {
 /* Error page CSS */
 #error {
   margin: 20px;
+}
+
+/* Slides */
+#hidden-about {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 100%;
+}
+
+#hidden-space {
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  right: 100%;
+}
+
+#hidden-leave {
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 100%;
+}
+
+#hidden-home {
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  bottom: 99.5%;
+}
+
+.slideUp {
+  transition: transform 1s ease-in-out;
+  transform: translateY(-100vh);
+}
+
+.slideDown {
+  transition: transform 1s ease-in-out;
+  transform: translateY(100vh);
+}
+
+.slideRight {
+  transition: transform 1s ease-in-out;
+  transform: translateX(100%);
+}
+
+.slideLeft {
+  transition: transform 1s ease-in-out;
+  transform: translateX(-100%);
 }
 
 @keyframes fadeIn {
