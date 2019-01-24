@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <body>
-    <div style="margin:10px">
-      <a href="/">home</a>
-      <h1>
-        observatory
-      </h1>
+  <body class="container">
+    <h1 id="obs-title">observatory</h1>
+    <div id="songs">
+      <!-- songs are inserted here -->
     </div>
   </body>
+  <script src="/static/js/sound.js"></script>
+  <script src="/static/js/observatory.js"></script>
 {% endblock %}

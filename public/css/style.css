@@ -23,6 +23,68 @@ a {
   opacity: .7;
 }
 
+#modal {
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
+}
+
+.modal-content {
+  position: relative;
+  top: 200px;
+  background-color: #555555;
+  margin: auto;
+  padding: 0;
+  width: 40%;
+  border: 1px solid #404040;
+  border-radius: 4px;
+  box-shadow: 0 0 20px #000;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+.modal-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+#close-modal {
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#close-modal:hover {
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#close-modal:focus {
+  outline: 0;
+}
+
+@keyframes slideIn {
+  from {top: 0; opacity: 0}
+  to {top: 200px; opacity: 1}
+}
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -36,9 +98,9 @@ a {
   animation: fadeIn .8s ease-in-out 1;
 }
 
-#top-bar {
+/* #top-bar {
   transition: opacity 4s ease;
-}
+} */
 
 .top-container {
   flex: 1;
@@ -46,14 +108,20 @@ a {
   justify-content: center;
 }
 
-.share {
+#top-left {
   padding-left: 20px;
   flex-direction: column;
+  transition: opacity 4s ease;
 }
 
-.record {
+#top-right {
   padding-right: 20px;
   justify-content: flex-end;
+  transition: opacity 4s ease;
+}
+
+#record {
+  cursor: pointer;
 }
 
 .prompt {
@@ -84,14 +152,10 @@ a {
   left: 70%;
   animation: move 600s linear infinite;
   animation-delay: -150s;
-  z-index: 10;
+  z-index: 1;
 }
 
-.obs-container, .record-container {
-  position: relative;
-}
-
-#ship-text, #obs-soon {
+#ship-text {
   width: 120px;
   background-color: #555;
   color: #fff;
@@ -107,7 +171,7 @@ a {
   transition: opacity 0.5s;
 }
 
-#ship-text::after, #obs-soon::after {
+#ship-text::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -118,33 +182,7 @@ a {
   border-color: #555 transparent transparent transparent;
 }
 
-#record-soon {
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: -25%;
-  right: 128%;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-#record-soon::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent #555;
-}
-
-.ship-container:hover #ship-text, .obs-container:hover #obs-soon, .record-container:hover #record-soon {
+.ship-container:hover #ship-text {
   opacity: 1;
 }
 

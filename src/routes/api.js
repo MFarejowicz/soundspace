@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/user');
+const Song = require('../models/song');
 
 router.get('/userinfo', function(req, res) {
   if (req.isAuthenticated()) {
@@ -15,6 +16,12 @@ router.get('/userinfo', function(req, res) {
   } else {
     res.send('Login required.')
   }
+});
+
+router.get('/getsongs', function(req, res) {
+  Song.find({}).then((songs) => {
+    res.send(songs);
+  });
 });
 
 // Route to log when a user taps
@@ -64,6 +71,31 @@ router.post('/join', function(req, res) {
   }
 
   res.send({});
+});
+
+router.post('/savesong', function(req, res) {
+  if (req.isAuthenticated()) {
+    const song = new Song({
+      name: req.body.name,
+      ownerId: req.user.googleid,
+      ownerName: req.user.name,
+      timeStamp: new Date(),
+      notes: req.body.song,
+      upvotes: 0,
+      downvotes: 0
+    });
+
+    song.save(function (err) {
+      if (err) {
+        console.log(err);
+        res.send('An error occurred!');
+      }
+      console.log('song saved!');
+      res.send('success!');
+    });
+  } else {
+    res.send('Login required.');
+  }
 });
 
 module.exports = router;

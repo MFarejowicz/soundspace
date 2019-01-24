@@ -2,9 +2,23 @@
 
 {% block content %}
   <body class="container">
+    <div id="modal" style="display: none">
+      <div class="modal-content">
+        <div class="modal-top">
+          <span id="close-modal" onclick="closeModal()">X</span>
+        </div>
+        <div class="modal-mid">
+          <span id="modal-text">Nice recording</span>
+          <button onclick="playBack()">play</button>
+          <input id="song-name" type="text" placeholder="name"/>
+          <button onclick="saveSong()">save</button>
+          <button onclick="closeModal()">cancel</button>
+        </div>
+      </div>
+    </div>
     <div id="top">
       <div id="top-bar" class="prompt space-prompt">
-        <div class="share top-container">
+        <div id="top-left" class="top-container">
           <div class="share-title">
             invite link:
           </div>
@@ -15,13 +29,10 @@
         <div class="top-container" id="prompt-text">
           <div class="blink">press any key to start</div>
         </div>
-        <div class="record top-container">
+        <div id="top-right" class="top-container">
           {% if loggedIn %}
-          <div class="record-container">
-            <div id="record-soon">coming soon</div>
-            <div>
-              record
-            </div>
+          <div id="record" onclick="handleRecord()">
+            record
           </div>
           {% endif %}
         </div>
@@ -56,10 +67,7 @@
         {% endif %}
       </div>
       <div class="bot-container">
-        <div class="obs-container">
-          <div id="obs-soon">coming soon</div>
-          <a class="bot-link" id="obs">observatory</a>
-        </div>
+        <a class="bot-link" id="obs" href="/observatory">observatory</a>
       </div>
     </div>
     <div id="hidden-about">
