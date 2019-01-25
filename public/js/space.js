@@ -60,6 +60,18 @@ function recordSound(sound) {
   song.push(note);
 }
 
+function toSpace(id) {
+  let slide = document.getElementById('hidden-space');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideRight');
+  top.classList.toggle('slideRight');
+  bot.classList.toggle('slideRight');
+  setTimeout(() => {
+    window.location.href = `/space/${id}`;
+  }, 950);
+}
+
 function toAbout() {
   let slide = document.getElementById('hidden-about');
   let top = document.getElementById('top');
@@ -73,7 +85,7 @@ function toAbout() {
 }
 
 function toObservatory() {
-  let slide = document.getElementById('hidden-leave');
+  let slide = document.getElementById('hidden-space');
   let top = document.getElementById('top');
   let bot = document.getElementById('bot');
   slide.classList.toggle('slideLeft');
@@ -84,8 +96,8 @@ function toObservatory() {
   }, 950);
 }
 
-function slideLeft() {
-  let slide = document.getElementById('hidden-leave');
+function toHome() {
+  let slide = document.getElementById('hidden-space');
   let top = document.getElementById('top');
   let bot = document.getElementById('bot');
   slide.classList.toggle('slideLeft');
@@ -136,8 +148,8 @@ function appendSpawn(spawnInfo, hue) {
     spawn.setAttribute('src', `/static/img/${spawnInfo.type}${spawnInfo.num}.png`);
   }
   spawn.setAttribute('class', 'spawn');
-  spawn.style.top = `${spawnInfo.y}%`;
-  spawn.style.left = `${spawnInfo.x}%`;
+  spawn.style.top = `${spawnInfo.y}vh`;
+  spawn.style.left = `${spawnInfo.x}vw`;
   spawn.style.filter = `hue-rotate(${hue}deg)`;
   spawn.style.transform = `scale(${spawnInfo.scale}, ${spawnInfo.scale})`;
 
@@ -197,20 +209,6 @@ function chooseSpawn() {
 window.onload = () => {
   let timeout;
   let prompt = true;
-
-  let myShip = document.getElementById('my-ship');
-  if (myShip) {
-    myShip.setAttribute('src', `/static/img/ship${getRandomInt(1, 3)}.gif`);
-
-    axios.get('/api/userinfo')
-    .then((res) => {
-      let myShipText = document.getElementById('ship-text');
-      myShipText.innerText = `${res.data.name}\n\nTaps: ${res.data.taps}`
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
 
   let bot = document.getElementById('bot');
   let topLeft = document.getElementById('top-left');
@@ -336,7 +334,7 @@ window.onload = () => {
       }
     } else {
       if (e.keyCode === 13) {
-        window.location.href = `${window.location.origin}/space/${joinInput.value}`;
+        toSpace(joinInput.value);
       }
     }
 
@@ -368,8 +366,8 @@ function renderShip(user) {
   const container = document.createElement('div');
   container.className = 'ship-container';
   container.id = `${user.id}-ship`;
-  container.style.top = `${user.ship.shipTop}%`;
-  container.style.left = `${user.ship.shipLeft}%`;
+  container.style.top = `${user.ship.shipTop}vh`;
+  container.style.left = `${user.ship.shipLeft}vw`;
 
   const text = document.createElement('div');
   text.className = 'ship-text';

@@ -1,6 +1,18 @@
 const socket = io();
 const hue = getRandomInt(0, 360);
 
+function toSpace(id) {
+  let slide = document.getElementById('hidden-space');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideRight');
+  top.classList.toggle('slideRight');
+  bot.classList.toggle('slideRight');
+  setTimeout(() => {
+    window.location.href = `/space/${id}`;
+  }, 950);
+}
+
 function toAbout() {
   let slide = document.getElementById('hidden-about');
   let top = document.getElementById('top');
@@ -65,8 +77,8 @@ function appendSpawn(spawnInfo, hue) {
     spawn.setAttribute('src', `/static/img/${spawnInfo.type}${spawnInfo.num}.png`);
   }
   spawn.setAttribute('class', 'spawn');
-  spawn.style.top = `${spawnInfo.y}%`;
-  spawn.style.left = `${spawnInfo.x}%`;
+  spawn.style.top = `${spawnInfo.y}vh`;
+  spawn.style.left = `${spawnInfo.x}vw`;
   spawn.style.filter = `hue-rotate(${hue}deg)`;
   spawn.style.transform = `scale(${spawnInfo.scale}, ${spawnInfo.scale})`;
 
@@ -136,7 +148,7 @@ window.onload = () => {
       timeout = setTimeout(() => {
         bot.style.transition = "opacity 4s ease, transform 1s ease-in-out";
         bot.style.opacity = 0
-      }, 6000);
+      }, 5000);
     }
   }
 
@@ -229,7 +241,7 @@ window.onload = () => {
       }
     } else {
       if (e.keyCode === 13) {
-        window.location.href = `${window.location.origin}/space/${joinInput.value}`;
+        toSpace(joinInput.value);
       }
     }
 
@@ -269,23 +281,15 @@ function createSpace() {
 
   const spaceId = generateSpaceId();
 
-  let slide = document.getElementById('hidden-space');
-  let top = document.getElementById('top');
-  let bot = document.getElementById('bot');
-  slide.classList.toggle('slideRight');
-  top.classList.toggle('slideRight');
-  bot.classList.toggle('slideRight');
-  setTimeout(() => {
-    window.location.href = `/space/${spaceId}`;
-  }, 950);
+  toSpace(spaceId);
 }
 
 function renderShip(user) {
   const container = document.createElement('div');
   container.className = 'ship-container';
   container.id = `${user.id}-ship`;
-  container.style.top = `${user.ship.shipTop}%`;
-  container.style.left = `${user.ship.shipLeft}%`;
+  container.style.top = `${user.ship.shipTop}vh`;
+  container.style.left = `${user.ship.shipLeft}vw`;
 
   const text = document.createElement('div');
   text.className = 'ship-text';

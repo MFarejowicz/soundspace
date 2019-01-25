@@ -258,6 +258,7 @@ a {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 #about-top {
@@ -349,12 +350,12 @@ a {
 
 .slideRight {
   transition: transform 1s ease-in-out;
-  transform: translateX(100%);
+  transform: translateX(100vw);
 }
 
 .slideLeft {
   transition: transform 1s ease-in-out;
-  transform: translateX(-100%);
+  transform: translateX(-100vw);
 }
 
 /* Constellations in observatory */
