@@ -60,7 +60,7 @@ function recordSound(sound) {
   song.push(note);
 }
 
-function slideUp() {
+function toAbout() {
   let slide = document.getElementById('hidden-about');
   let top = document.getElementById('top');
   let bot = document.getElementById('bot');
@@ -69,6 +69,18 @@ function slideUp() {
   bot.classList.toggle('slideUp');
   setTimeout(() => {
     window.location.href = '/about';
+  }, 950);
+}
+
+function toObservatory() {
+  let slide = document.getElementById('hidden-leave');
+  let top = document.getElementById('top');
+  let bot = document.getElementById('bot');
+  slide.classList.toggle('slideLeft');
+  top.classList.toggle('slideLeft');
+  bot.classList.toggle('slideLeft');
+  setTimeout(() => {
+    window.location.href = `/observatory`;
   }, 950);
 }
 
