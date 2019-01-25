@@ -7,26 +7,37 @@ function playSong(notes) {
 }
 
 function songDOMObject(song) {
-  const card = document.createElement('div');
-  card.setAttribute('id', song._id);
+  const constellations = ['leo', 'aquila', 'aries', 'canismajor', 'cassiopeia', 'andromeda', 'taurus',
+    'ursamajor', 'virgo', 'scorpius', 'sagittarius', 'pisces', 'orion', 'libra', 'gemini', 'aquarius',
+    'cancer', 'capricornus'];
+  const randomConstellation = constellations[Math.floor(Math.random() * constellations.length)];
 
+  const conRotate = Math.floor(Math.random() * 360);
+  const conHueRotate = Math.floor(Math.random() * 360);
 
-  const nameSpan = document.createElement('span');
-  nameSpan.innerText = song.name;
-  card.appendChild(nameSpan);
+  const constellation = document.createElement('div');
+  constellation.setAttribute('id', song._id);
+  constellation.className = 'constellation';
 
-  const ownerSpan = document.createElement('span');
-  ownerSpan.innerText = song.ownerName;
-  card.appendChild(ownerSpan);
+  const conImage = document.createElement('img');
+  conImage.src = `/static/img/${randomConstellation}_constellation.png`;
+  conImage.style.transform = `rotate(${conRotate}deg) scale(0.8)`;
+  conImage.style.filter = `hue-rotate(${conHueRotate}deg)`;
 
-  const playSpan = document.createElement('span');
-  playSpan.innerText = 'play';
-  playSpan.onclick = () => {
-    playSong(song.notes);
-  }
-  card.appendChild(playSpan);
+  const conInfo = document.createElement('div');
+  conInfo.className = 'constellation-text';
+  conInfo.innerHTML = `${song.name}<br>${song.ownerName}`
 
-  return card;
+  constellation.appendChild(conInfo);
+  constellation.appendChild(conImage);
+
+  // const playSpan = document.createElement('span');
+  // playSpan.innerText = 'play';
+  // playSpan.onclick = () => {
+  //   playSong(song.notes);
+  // }
+
+  return constellation;
 }
 
 function renderSongs() {
