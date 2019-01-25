@@ -185,7 +185,6 @@ function chooseSpawn() {
 window.onload = () => {
   let timeout;
   let prompt = true;
-  let hue = getRandomInt(0, 360);
 
   let myShip = document.getElementById('my-ship');
   if (myShip) {
