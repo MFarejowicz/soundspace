@@ -14,7 +14,7 @@ router.get('/userinfo', function(req, res) {
       res.send('An error occurred!')
     });
   } else {
-    res.send('Login required.')
+    res.send('anon');
   }
 });
 

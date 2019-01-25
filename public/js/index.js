@@ -1,4 +1,5 @@
 const socket = io();
+const hue = getRandomInt(0, 360);
 
 function slideUp() {
   let slide = document.getElementById('hidden-about');
@@ -113,21 +114,6 @@ function chooseSpawn() {
 window.onload = () => {
   let timeout;
   let prompt = true;
-  let hue = getRandomInt(0, 360);
-
-  let myShip = document.getElementById('my-ship');
-  if (myShip) {
-    myShip.setAttribute('src', `/static/img/ship${getRandomInt(1, 3)}.gif`);
-
-    axios.get('/api/userinfo')
-    .then((res) => {
-      let myShipText = document.getElementById('ship-text');
-      myShipText.innerText = `${res.data.name}\n\nTaps: ${res.data.taps}`
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
 
   let bot = document.getElementById('bot');
   document.onmousemove = () => {
@@ -243,11 +229,10 @@ window.onload = () => {
 
     // Check if the user is logged in by looking for the log out element
     if (document.getElementById('logout')) {
-      // Make post request to track taps
+      // Make post request to track taps and let others know taps updated
       axios.post('/api/tap')
       .then((res) => {
-        let myShipText = document.getElementById('ship-text');
-        myShipText.innerText = `${res.data.name}\n\nTaps: ${res.data.taps}`
+        socket.emit('user tap', res.data.taps);
       })
       .catch((error) => {
         console.log(error);
@@ -283,28 +268,99 @@ function createSpace() {
   }, 950);
 }
 
+function renderShip(user) {
+  const container = document.createElement('div');
+  container.className = 'ship-container';
+  container.id = `${user.id}-ship`;
+  container.style.top = `${user.ship.shipTop}%`;
+  container.style.left = `${user.ship.shipLeft}%`;
+
+  const text = document.createElement('div');
+  text.className = 'ship-text';
+
+  const name = document.createElement('span');
+  name.innerText = user.name;
+  text.appendChild(name);
+
+  text.appendChild(document.createElement('br'));
+
+  const taps = document.createElement('span');
+  taps.id = `${user.id}-ship-taps`;
+  taps.innerText = `Taps: ${user.taps}`;
+  text.appendChild(taps);
+
+  container.appendChild(text);
+
+  const img = document.createElement('img');
+  img.setAttribute('src', `/static/img/ship1.gif`);
+  img.style.filter = `hue-rotate(${user.ship.hue}deg)`
+  container.appendChild(img);
+
+  container.onmouseover = () => {
+    text.style.visibility = 'visible';
+    text.style.opacity = 1;
+  }
+
+  container.onmouseout = () => {
+    text.style.visibility = 'hidden';
+    text.style.opacity = 0;
+  }
+
+  document.getElementById('all-the-ships').appendChild(container);
+}
+
 socket.on('connect', () => {
-  const spacecode = window.location.pathname.slice(7);
+  const spaceCode = window.location.pathname.slice(7);
+  const shipTop = getRandomInt(25, 70);
+  const shipLeft = getRandomInt(2, 90);
+  const shipInfo = { hue, shipTop, shipLeft };
 
-  if (spacecode.length === 4) {
-    console.log(`Joining ${spacecode}`);
-    socket.emit('join room', spacecode);
-  } else if (spacecode.length === 0) {
-    console.log(`Joining default`);
-    socket.emit('join room', 'default');
-  }
+  axios.get('/api/userinfo')
+  .then((res) => {
+    let userInfo = res.data;
 
-  if (document.getElementById('logout')) {
-    // Make post request to track joins
-    axios.post('/api/join')
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    if (spaceCode.length === 4) {
+      console.log(`Joining ${spaceCode}`);
+      socket.emit('join room', spaceCode, userInfo, shipInfo);
+    } else if (spaceCode.length === 0) {
+      console.log(`Joining default`);
+      socket.emit('join room', 'default', userInfo, shipInfo);
+    }
+
+    if (userInfo !== 'anon') {
+      // Make post request to track joins
+      axios.post('/api/join')
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 });
 
 socket.on('handle sound', (sound, spawn, hue) => {
   console.log(`received sound ${sound}`);
   playSound(sound);
   appendSpawn(spawn, hue);
+});
+
+socket.on('user tap', (id, taps) => {
+  const text = document.getElementById(`${id}-ship-taps`);
+  if (text) text.innerText = `Taps: ${taps}`;
+});
+
+socket.on('user join', (users) => {
+  for (let user of users) {
+    const ship = document.getElementById(`${user.id}-ship`);
+    if (!ship) {
+      renderShip(user);
+    }
+  }
+});
+
+socket.on('user leave', (id) => {
+  const ship = document.getElementById(`${id}-ship`);
+  if (ship) ship.parentNode.removeChild(ship);
 });

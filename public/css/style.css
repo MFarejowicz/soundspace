@@ -148,14 +148,11 @@ a {
 
 .ship-container {
   position: absolute;
-  top: 75%;
-  left: 70%;
-  animation: move 600s linear infinite;
-  animation-delay: -150s;
   z-index: 1;
 }
 
-#ship-text {
+.ship-text {
+  visibility: hidden;
   width: 120px;
   background-color: #555;
   color: #fff;
@@ -168,10 +165,10 @@ a {
   left: 50%;
   margin-left: -60px;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: all 0.5s;
 }
 
-#ship-text::after {
+.ship-text::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -180,10 +177,6 @@ a {
   border-width: 5px;
   border-style: solid;
   border-color: #555 transparent transparent transparent;
-}
-
-.ship-container:hover #ship-text {
-  opacity: 1;
 }
 
 .spawn {
