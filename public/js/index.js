@@ -304,7 +304,7 @@ function renderShip(user) {
   container.appendChild(text);
 
   const img = document.createElement('img');
-  img.setAttribute('src', `/static/img/ship1.gif`);
+  img.setAttribute('src', `/static/img/ship.gif`);
   img.style.filter = `hue-rotate(${user.ship.hue}deg)`
   container.appendChild(img);
 
