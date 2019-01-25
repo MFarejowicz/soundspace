@@ -98,10 +98,6 @@ a {
   animation: fadeIn .8s ease-in-out 1;
 }
 
-/* #top-bar {
-  transition: opacity 4s ease;
-} */
-
 .top-container {
   flex: 1;
   display: flex;
@@ -366,6 +362,52 @@ a {
 .slideLeft {
   transition: transform 1s ease-in-out;
   transform: translateX(-100%);
+}
+
+/* Constellations in observatory */
+
+#songs {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.constellation {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.constellation-text {
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 90%;
+  left: 50%;
+  margin-left: -80px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.constellation-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.constellation:hover .constellation-text {
+  opacity: 1;
 }
 
 @keyframes fadeIn {
