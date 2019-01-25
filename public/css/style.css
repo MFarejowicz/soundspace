@@ -368,11 +368,12 @@ a {
 
 .constellation {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
 }
 
 .constellation-text {
+  visibility: hidden;
   width: 160px;
   background-color: #555;
   color: #fff;
@@ -385,7 +386,7 @@ a {
   left: 50%;
   margin-left: -80px;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: all 0.5s;
 }
 
 .constellation-text::after {
@@ -401,6 +402,7 @@ a {
 
 .constellation:hover .constellation-text {
   opacity: 1;
+  visibility: visible;
 }
 
 @keyframes fadeIn {

@@ -24,18 +24,23 @@ function songDOMObject(song) {
   conImage.style.transform = `rotate(${conRotate}deg) scale(0.8)`;
   conImage.style.filter = `hue-rotate(${conHueRotate}deg)`;
 
+  const conPopup = document.createElement('div');
+  conPopup.className = 'constellation-text';
+
   const conInfo = document.createElement('div');
-  conInfo.className = 'constellation-text';
   conInfo.innerHTML = `${song.name}<br>${song.ownerName}`
 
-  constellation.appendChild(conInfo);
-  constellation.appendChild(conImage);
+  const play = document.createElement('div');
+  play.innerText = 'play';
+  play.onclick = () => {
+    playSong(song.notes);
+  }
 
-  // const playSpan = document.createElement('span');
-  // playSpan.innerText = 'play';
-  // playSpan.onclick = () => {
-  //   playSong(song.notes);
-  // }
+  conPopup.appendChild(conInfo);
+  conPopup.appendChild(play);
+
+  constellation.appendChild(conPopup);
+  constellation.appendChild(conImage);
 
   return constellation;
 }
