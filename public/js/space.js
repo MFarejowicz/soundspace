@@ -1,4 +1,63 @@
 const socket = io();
+let recording = false;
+let startTime = null;
+let song = [];
+
+function playBack() {
+  for (let note of song) {
+    setTimeout(() => {
+      playSound(note.sound);
+    }, note.time);
+  }
+}
+
+function saveSong() {
+  let nameInput = document.getElementById('song-name');
+  let name = nameInput.value;
+  if (name) {
+    axios.post('/api/savesong', { name, song })
+    .then((res) => {
+      console.log(res);
+      nameInput.value = '';
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  } else {
+    alert('song name required!');
+  }
+}
+
+function closeModal() {
+  let modal = document.getElementById('modal');
+  modal.style.display = "none";
+  song = [];
+}
+
+function savePrompt() {
+  let modal = document.getElementById('modal');
+  modal.style.display = "block";
+}
+
+function handleRecord() {
+  if (!recording){
+    startTime = new Date();
+    document.getElementById('record').innerText = 'stop';
+  } else {
+    savePrompt();
+    // playBack(song);
+    document.getElementById('record').innerText = 'record';
+  }
+  recording = !recording;
+}
+
+function recordSound(sound) {
+  const now = new Date();
+  const note = {};
+  note.time = now - startTime;
+  note.sound = sound;
+  song.push(note);
+}
 
 function slideUp() {
   let slide = document.getElementById('hidden-about');
@@ -142,26 +201,43 @@ window.onload = () => {
   }
 
   let bot = document.getElementById('bot');
-  let topBar = document.getElementById('top-bar');
+  let topLeft = document.getElementById('top-left');
+  let topRight = document.getElementById('top-right');
   document.onmousemove = () => {
     if (!prompt) {
       bot.style.transition = "opacity 1s ease, transform 1s ease-in-out";
       bot.style.opacity = 1;
-      topBar.style.transition = "opacity 1s ease, transform 1s ease-in-out";
-      topBar.style.opacity = 1;
+      topLeft.style.transition = "opacity 1s ease, transform 1s ease-in-out";
+      topLeft.style.opacity = 1;
+      topRight.style.transition = "opacity 1s ease, transform 1s ease-in-out";
+      topRight.style.opacity = 1;
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         bot.style.transition = "opacity 4s ease, transform 1s ease-in-out";
-        bot.style.opacity = 0
-        topBar.style.transition = "opacity 4s ease, transform 1s ease-in-out";
-        topBar.style.opacity = 0
+        bot.style.opacity = 0;
+        topLeft.style.transition = "opacity 4s ease, transform 1s ease-in-out";
+        topLeft.style.opacity = 0;
+        if (!recording) {
+          topRight.style.transition = "opacity 4s ease, transform 1s ease-in-out";
+          topRight.style.opacity = 0;
+        }
       }, 5000);
+    }
+  }
+
+  document.onclick = (event) => {
+    const modal = document.getElementById('modal');
+    if (event.target === modal) {
+      modal.style.display = "none";
+      song = [];
     }
   }
 
   document.onkeypress = (e) => {
     const joinInput = document.getElementById('join-input');
-    if (!(joinInput === document.activeElement)) { //May want to investigate this, seems to stop sounds sometimes
+    const modal = document.getElementById('modal');
+    if (!(joinInput === document.activeElement) && modal.style.display === 'none') {
+      //May want to investigate this conditional, seems to stop sounds sometimes
       const spawnInfo = chooseSpawn();
 
       switch (e.keyCode) {
@@ -256,7 +332,8 @@ window.onload = () => {
       fadeOutAndRemove(document.getElementById('prompt-text'), 10, 2000);
       setTimeout(() => {
         bot.style.opacity = 0;
-        topBar.style.opacity = 0;
+        topLeft.style.opacity = 0;
+        if (!recording) topRight.style.opacity = 0;
       }, 6000);
       prompt = false;
     }
@@ -300,4 +377,7 @@ socket.on('handle sound', (sound, spawn, hue) => {
   console.log(`received sound ${sound}`);
   playSound(sound);
   appendSpawn(spawn, hue);
+  if (recording) {
+    recordSound(sound);
+  }
 });
