@@ -22,7 +22,7 @@ router.get('/space/:space', function(req, res) {
   if (space.length === 4) {
     res.render('space.html', { spacecode: space, loggedIn: req.isAuthenticated() } );
   } else {
-    res.send("Sorry! Not a valid room code");
+    res.render('error.html', { status: '469', message: 'Invalid Room Code' });
   }
 });
 

@@ -7,12 +7,37 @@
         <div class="modal-top">
           <span id="close-modal" onclick="closeModal()">X</span>
         </div>
-        <div class="modal-mid">
-          <span id="modal-text">Nice recording</span>
-          <button onclick="playBack()">play</button>
-          <input id="song-name" type="text" placeholder="name"/>
-          <button onclick="saveSong()">save</button>
-          <button onclick="closeModal()">cancel</button>
+        <div id="save-prompt" class="modal-mid">
+          <div class="modal-title-container">
+            <span id="modal-title">save your song</span>
+          </div>
+          <div class="modal-line">
+            <span class="modal-label">listen again:</span>
+            <button class="space-button" onclick="playBack()">play</button>
+          </div>
+          <div class="modal-line">
+            <span class="modal-label">name and save:</span>
+            <input id="song-name" type="text" placeholder="name"/>
+            <button class="space-button" onclick="saveSong()">save</button>
+          </div>
+          <div id="need-name">your song needs a name!</div>
+          <div class="modal-line">
+            <span class="modal-label">discard:</span>
+            <button class="space-button" onclick="closeModal()">cancel</button>
+          </div>
+        </div>
+        <div id="save-success" class="modal-mid">
+          <div class="modal-title-container">
+            <span id="modal-title">song saved successfully</span>
+          </div>
+          <div class="modal-line">
+            <span class="modal-label">find it in the observatory:</span>
+            <button class="space-button" onclick=toObservatory()>travel</button>
+          </div>
+          <div class="modal-line">
+            <span class="modal-label">stay here:</span>
+            <button class="space-button" onclick="closeModal()">cancel</button>
+          </div>
         </div>
       </div>
     </div>
@@ -32,7 +57,8 @@
         <div id="top-right" class="top-container">
           {% if loggedIn %}
           <div id="record" onclick="handleRecord()">
-            record
+            <span id="record-text">record</span>
+            <img id="record-pic" src="/static/img/record.png" style="width: 18px"/>
           </div>
           {% endif %}
         </div>

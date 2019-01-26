@@ -239,7 +239,7 @@ window.onload = () => {
         default:
           console.log(e.keyCode);
       }
-    } else {
+    } else if (joinInput === document.activeElement) {
       if (e.keyCode === 13) {
         toSpace(joinInput.value);
       }
@@ -309,7 +309,8 @@ function renderShip(user) {
 
   const img = document.createElement('img');
   img.setAttribute('src', `/static/img/ship.gif`);
-  img.style.filter = `hue-rotate(${user.ship.hue}deg)`
+  img.style.filter = `hue-rotate(${user.ship.hue}deg)`;
+  img.style.transform = `scale(.75, .75)`;
   container.appendChild(img);
 
   container.onmouseover = () => {

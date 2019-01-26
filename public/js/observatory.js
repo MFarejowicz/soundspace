@@ -23,6 +23,7 @@ function songDOMObject(song) {
   conImage.src = `/static/img/${randomConstellation}_constellation.png`;
   conImage.style.transform = `rotate(${conRotate}deg) scale(0.8)`;
   conImage.style.filter = `hue-rotate(${conHueRotate}deg)`;
+  conImage.style.opacity = 0.8;
 
   const conPopup = document.createElement('div');
   conPopup.className = 'constellation-text';

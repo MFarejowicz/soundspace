@@ -13,30 +13,42 @@ function playBack() {
 }
 
 function saveSong() {
-  let nameInput = document.getElementById('song-name');
-  let name = nameInput.value;
+  const nameInput = document.getElementById('song-name');
+  const name = nameInput.value;
   if (name) {
     axios.post('/api/savesong', { name, song })
     .then((res) => {
-      console.log(res);
+      const savePrompt = document.getElementById('save-prompt');
+      const saveSuccess = document.getElementById('save-success');
+      savePrompt.style.display = 'none';
+      saveSuccess.style.display = 'block';
       nameInput.value = '';
     })
     .catch((error) => {
       console.log(error);
     });
   } else {
-    alert('song name required!');
+    document.getElementById('need-name').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('need-name').style.display = 'none';
+    }, 3000);
   }
 }
 
 function closeModal() {
-  let modal = document.getElementById('modal');
+  const modal = document.getElementById('modal');
   modal.style.display = "none";
+  const savePrompt = document.getElementById('save-prompt');
+  const saveSuccess = document.getElementById('save-success');
+  savePrompt.style.display = 'block';
+  saveSuccess.style.display = 'none';
 }
 
 function savePrompt() {
-  let modal = document.getElementById('modal');
+  const modal = document.getElementById('modal');
   modal.style.display = "block";
+  const nameInput = document.getElementById('song-name');
+  nameInput.value = '';
 }
 
 function handleRecord() {
@@ -44,11 +56,13 @@ function handleRecord() {
     song = [];
     startTime = new Date();
     socket.emit('start record', startTime);
-    document.getElementById('record').innerText = 'stop';
+    document.getElementById('record-text').innerText = 'stop';
+    document.getElementById('record-pic').setAttribute('src', '/static/img/stop.png');
   } else {
     savePrompt();
     socket.emit('stop record');
-    document.getElementById('record').innerText = 'record';
+    document.getElementById('record-text').innerText = 'record';
+    document.getElementById('record-pic').setAttribute('src', '/static/img/record.png');
   }
   recording = !recording;
 }
@@ -333,7 +347,7 @@ window.onload = () => {
         default:
           console.log(e.keyCode);
       }
-    } else {
+    } else if (joinInput === document.activeElement) {
       if (e.keyCode === 13) {
         toSpace(joinInput.value);
       }
@@ -388,7 +402,8 @@ function renderShip(user) {
 
   const img = document.createElement('img');
   img.setAttribute('src', `/static/img/ship.gif`);
-  img.style.filter = `hue-rotate(${user.ship.hue}deg)`
+  img.style.filter = `hue-rotate(${user.ship.hue}deg)`;
+  img.style.transform = `scale(.75, .75)`;
   container.appendChild(img);
 
   container.onmouseover = () => {
@@ -437,7 +452,9 @@ socket.on('connect', () => {
 
 socket.on('handle sound', (sound, spawn, hue) => {
   console.log(`received sound ${sound}`);
-  playSound(sound);
+  if (document.getElementById('modal').style.display === 'none') {
+    playSound(sound);
+  }
   appendSpawn(spawn, hue);
   if (recording) {
     recordSound(sound);
@@ -453,14 +470,14 @@ socket.on('start record', (time) => {
   recording = true;
   startTime = time;
   song = [];
-  document.getElementById('record').innerText = 'recording';
+  document.getElementById('record-text').innerText = 'recording';
   document.getElementById('record').style.cursor = 'default';
   document.getElementById('record').onclick = () => {};
 });
 
 socket.on('stop record', () => {
   recording = false;
-  document.getElementById('record').innerText = 'record';
+  document.getElementById('record-text').innerText = 'record';
   document.getElementById('record').style.cursor = 'pointer';
   document.getElementById('record').onclick = () => {
     handleRecord();

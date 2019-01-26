@@ -23,68 +23,6 @@ a {
   opacity: .7;
 }
 
-#modal {
-    position: fixed; /* Stay in place */
-    z-index: 2; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
-}
-
-.modal-content {
-  position: relative;
-  top: 200px;
-  background-color: #555555;
-  margin: auto;
-  padding: 0;
-  width: 40%;
-  border: 1px solid #404040;
-  border-radius: 4px;
-  box-shadow: 0 0 20px #000;
-  -webkit-animation-name: slideIn;
-  -webkit-animation-duration: 0.4s;
-  animation-name: slideIn;
-  animation-duration: 0.4s
-}
-
-.modal-top {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.modal-mid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 30px;
-  margin-bottom: 30px;
-}
-
-#close-modal {
-  font-size: 25px;
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-#close-modal:hover {
-  color: red;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#close-modal:focus {
-  outline: 0;
-}
-
-@keyframes slideIn {
-  from {top: 0; opacity: 0}
-  to {top: 200px; opacity: 1}
-}
-
 .container {
   min-height: 100vh;
   display: flex;
@@ -117,8 +55,14 @@ a {
 }
 
 #record {
+  display: flex;
+  align-items: center;
   cursor: pointer;
   padding: 12px;
+}
+
+#record-text {
+  margin-right: 5px;
 }
 
 .prompt {
@@ -167,7 +111,7 @@ a {
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  bottom: 125%;
+  bottom: 100%;
   left: 50%;
   margin-left: -60px;
   opacity: 0;
@@ -206,6 +150,117 @@ a {
 .bot-link {
   cursor: pointer;
   padding: 12px;
+}
+
+#modal {
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
+}
+
+.modal-content {
+  position: relative;
+  top: 200px;
+  background-color: #555555;
+  margin: auto;
+  padding: 8px 14px;
+  width: 30%;
+  border: 1px solid #404040;
+  border-radius: 4px;
+  box-shadow: 0 0 20px #000;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+.modal-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-mid {
+  margin-bottom: 18px;
+}
+
+.modal-title-container {
+  margin-top: -20px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#modal-title {
+  font-size: 30px;
+}
+
+.modal-line {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.modal-label {
+  margin-right: 4px;
+}
+
+#song-name {
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+#need-name {
+  font-size: 16px;
+  color: #ff3232;
+  display: none;
+  justify-content: center;
+}
+
+.space-button {
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  color: #444;
+  color: rgba(0,0,0,.8);
+  border: 1px solid #999;
+  border: transparent;
+  background-color: #E6E6E6;
+  border-radius: 2px;
+}
+
+.space-button:hover {
+  background-image: -webkit-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+  background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+}
+
+.space-button:focus {
+  outline: 0;
+}
+
+#close-modal {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#close-modal:hover {
+  color: #e50000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#close-modal:focus {
+  outline: 0;
+}
+
+#save-success {
+  display: none;
 }
 
 #join-space {
@@ -414,6 +469,11 @@ a {
 .constellation:hover .constellation-text {
   opacity: 1;
   visibility: visible;
+}
+
+@keyframes slideIn {
+  from {top: 0; opacity: 0}
+  to {top: 200px; opacity: 1}
 }
 
 @keyframes fadeIn {
