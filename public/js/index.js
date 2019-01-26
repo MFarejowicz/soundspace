@@ -113,7 +113,7 @@ function chooseSpawn() {
     num = 1;
     x = getRandom(0, 80);
     y = getRandom(0, 70);
-    scale = getRandom(.5, .8);
+    scale = getRandom(.6, .8);
   } else if (rand < 0.998) {
     type = 'meteor';
     upTime = 1800;

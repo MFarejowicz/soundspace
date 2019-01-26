@@ -32,7 +32,6 @@ function saveSong() {
 function closeModal() {
   let modal = document.getElementById('modal');
   modal.style.display = "none";
-  song = [];
 }
 
 function savePrompt() {
@@ -42,11 +41,13 @@ function savePrompt() {
 
 function handleRecord() {
   if (!recording){
+    song = [];
     startTime = new Date();
+    socket.emit('start record', startTime);
     document.getElementById('record').innerText = 'stop';
   } else {
     savePrompt();
-    // playBack(song);
+    socket.emit('stop record');
     document.getElementById('record').innerText = 'record';
   }
   recording = !recording;
@@ -184,7 +185,7 @@ function chooseSpawn() {
     num = 1;
     x = getRandom(0, 80);
     y = getRandom(0, 70);
-    scale = getRandom(.8, 1.2);
+    scale = getRandom(.6, .8);
   } else if (rand < 0.998) {
     type = 'meteor';
     upTime = 1800;
@@ -446,6 +447,24 @@ socket.on('handle sound', (sound, spawn, hue) => {
 socket.on('user tap', (id, taps) => {
   const text = document.getElementById(`${id}-ship-taps`);
   if (text) text.innerText = `Taps: ${taps}`;
+});
+
+socket.on('start record', (time) => {
+  recording = true;
+  startTime = time;
+  song = [];
+  document.getElementById('record').innerText = 'recording';
+  document.getElementById('record').style.cursor = 'default';
+  document.getElementById('record').onclick = () => {};
+});
+
+socket.on('stop record', () => {
+  recording = false;
+  document.getElementById('record').innerText = 'record';
+  document.getElementById('record').style.cursor = 'pointer';
+  document.getElementById('record').onclick = () => {
+    handleRecord();
+  }
 });
 
 socket.on('user join', (users) => {

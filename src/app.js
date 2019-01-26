@@ -104,13 +104,23 @@ io.on('connection', function(socket) {
   });
 
   socket.on('user tap', (taps) => {
-    io.to(socket.room).emit('user tap', socket.id, taps)
-  })
+    io.to(socket.room).emit('user tap', socket.id, taps);
+  });
+
+  socket.on('start record', (time) => {
+    socket.broadcast.to(socket.room).emit('start record', time);
+  });
+
+  socket.on('stop record', () => {
+    socket.broadcast.to(socket.room).emit('stop record');
+  });
 
   socket.on("disconnect", () => {
     let room = socket.room;
     let clientsInRoom = rooms[room];
-    clientsInRoom.splice(clientsInRoom.indexOf(socket), 1);
+    if (clientsInRoom) {
+      clientsInRoom.splice(clientsInRoom.indexOf(socket), 1);
+    }
 
     io.to(room).emit('user leave', socket.id);
 
