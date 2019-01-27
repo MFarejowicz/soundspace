@@ -3,12 +3,31 @@ const hue = getRandomInt(0, 360);
 let recording = false;
 let startTime = null;
 let song = [];
+let songTimeouts = [];
 
-function playBack() {
+function startPlayBack() {
   for (let note of song) {
-    setTimeout(() => {
-      playSound(note.sound);
-    }, note.time);
+    songTimeouts.push(
+      setTimeout(() => {
+        playSound(note.sound);
+      }, note.time)
+    );
+  }
+  const playButton = document.getElementById('play-button');
+  playButton.innerText = 'stop';
+  playButton.onclick = () => {
+    stopPlayBack();
+  }
+}
+
+function stopPlayBack() {
+  for (let sTimeout of songTimeouts) {
+    clearTimeout(sTimeout);
+  }
+  const playButton = document.getElementById('play-button');
+  playButton.innerText = 'play';
+  playButton.onclick = () => {
+    startPlayBack();
   }
 }
 

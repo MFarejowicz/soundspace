@@ -1,11 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <body class="container">
-    <h1 id="obs-title">observatory</h1>
-    <div id="songs">
-      <!-- songs are inserted here -->
+  <body class="obs">
+    <div id="obs-top">
+      <div class="obs-head">
+        <div class="obs-head-container" style="padding-left: 20px;">
+          <img src="/static/img/arrow_left.png" onclick="toHome()" style="width: 40px; cursor: pointer"/>
+        </div>
+        <div class="obs-head-container" style="display: flex; justify-content: center">
+          <h1 id="obs-title">observatory</h1>
+        </div>
+        <div class="obs-head-container"></div>
+      </div>
     </div>
+    <div id="songs-container">
+      <div id="songs">
+        <!-- songs are inserted here -->
+      </div>
+    </div>
+    <div id="hidden-home"></div>
   </body>
   <script src="/static/js/sound.js"></script>
   <script src="/static/js/observatory.js"></script>

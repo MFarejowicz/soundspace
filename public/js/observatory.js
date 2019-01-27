@@ -1,3 +1,15 @@
+function toHome() {
+  let slide = document.getElementById('hidden-home');
+  let top = document.getElementById('obs-top');
+  let bot = document.getElementById('songs-container');
+  slide.classList.toggle('slideRight');
+  top.classList.toggle('slideRight');
+  bot.classList.toggle('slideRight');
+  setTimeout(() => {
+    window.location.href = '/';
+  }, 950);
+}
+
 function playSong(notes) {
   for (let note of notes) {
     setTimeout(() => {

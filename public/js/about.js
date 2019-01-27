@@ -6,7 +6,7 @@ function back(){
   }
 }
 
-function slideDown() {
+function toHome() {
   let slide = document.getElementById('hidden-home');
   let top = document.getElementById('about-top');
   let bot = document.getElementById('about-bot');
