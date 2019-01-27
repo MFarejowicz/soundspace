@@ -11,6 +11,7 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
+  font-weight: normal;
 }
 
 a {
@@ -423,13 +424,42 @@ a {
   transform: translateX(-100vw);
 }
 
-/* Constellations in observatory */
+/* OBSERVATORY CSS */
+
+.obs {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: black;
+  color: white;
+  overflow: auto;
+}
+
+.obs-head {
+  height: 80px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.obs-head-container {
+  flex: 1;
+}
+
+#obs-title {
+  font-size: 40px;
+  color: #efefef;
+}
+
+#songs-container {
+  width: 85vw;
+  margin: auto;
+}
 
 #songs {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  margin-top: 50px;
-  margin-left: 50px;
 }
 
 .constellation {
