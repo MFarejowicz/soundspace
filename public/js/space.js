@@ -87,9 +87,16 @@ function handleRecord() {
   if (!recording){
     song = [];
     startTime = new Date();
-    socket.emit('start record', startTime);
     document.getElementById('record-text').innerText = 'stop';
     document.getElementById('record-pic').setAttribute('src', '/static/img/stop_red.png');
+    axios.get('/api/userinfo')
+    .then((res) => {
+      let userInfo = res.data;
+      socket.emit('start record', userInfo.name, startTime);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   } else {
     savePrompt();
     socket.emit('stop record');
@@ -484,7 +491,7 @@ socket.on('connect', () => {
 });
 
 socket.on('handle sound', (sound, spawn, hue) => {
-  console.log(`received sound ${sound}`);
+  // console.log(`received sound ${sound}`);
   if (document.getElementById('modal').style.display === 'none') {
     playSound(sound);
   }
@@ -499,21 +506,33 @@ socket.on('user tap', (id, taps) => {
   if (text) text.innerText = `Taps: ${taps}`;
 });
 
-socket.on('start record', (time) => {
+socket.on('start record', (name, time) => {
   recording = true;
   startTime = time;
   song = [];
-  document.getElementById('record-text').innerText = 'recording';
-  document.getElementById('record').style.cursor = 'default';
-  document.getElementById('record').onclick = () => {};
+  if (document.getElementById('logout')) {
+    document.getElementById('record-text').innerText = `${name} is recording`;
+    document.getElementById('record').style.cursor = 'default';
+    document.getElementById('record').onclick = () => {};
+  } else {
+    document.getElementById('record-text-nli').innerText = `${name} is recording`;
+    document.getElementById('record-pic-nli').style.width = '18px';
+    document.getElementById('record-pic-nli').setAttribute('src', '/static/img/record.png');
+  }
 });
 
 socket.on('stop record', () => {
   recording = false;
-  document.getElementById('record-text').innerText = 'record';
-  document.getElementById('record').style.cursor = 'pointer';
-  document.getElementById('record').onclick = () => {
-    handleRecord();
+  if (document.getElementById('logout')) {
+    document.getElementById('record-text').innerText = 'record';
+    document.getElementById('record').style.cursor = 'pointer';
+    document.getElementById('record').onclick = () => {
+      handleRecord();
+    }
+  } else {
+    document.getElementById('record-text-nli').innerText = 'login to record';
+    document.getElementById('record-pic-nli').style.width = '0px';
+    document.getElementById('record-pic-nli').setAttribute('src', '');
   }
 });
 

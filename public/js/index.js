@@ -358,7 +358,7 @@ socket.on('connect', () => {
 });
 
 socket.on('handle sound', (sound, spawn, hue) => {
-  console.log(`received sound ${sound}`);
+  // console.log(`received sound ${sound}`);
   playSound(sound);
   appendSpawn(spawn, hue);
 });

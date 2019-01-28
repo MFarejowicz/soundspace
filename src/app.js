@@ -107,8 +107,8 @@ io.on('connection', function(socket) {
     io.to(socket.room).emit('user tap', socket.id, taps);
   });
 
-  socket.on('start record', (time) => {
-    socket.broadcast.to(socket.room).emit('start record', time);
+  socket.on('start record', (name, time) => {
+    socket.broadcast.to(socket.room).emit('start record', name, time);
   });
 
   socket.on('stop record', () => {

@@ -62,7 +62,13 @@ a {
   padding: 12px;
 }
 
-#record-text {
+#record-nli {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+#record-text, #record-text-nli {
   margin-right: 5px;
 }
 
