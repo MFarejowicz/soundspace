@@ -448,6 +448,7 @@ a {
 
 .obs-head {
   height: 80px;
+  margin-bottom: 30px;
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -477,16 +478,16 @@ a {
   position: relative;
   width: 250px;
   height: 250px;
+  cursor: pointer;
 }
 
 .constellation-text {
   visibility: hidden;
-  width: 160px;
+  width: 200px;
   background-color: #555;
   color: #fff;
-  text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px 6px;
   position: absolute;
   z-index: 1;
   bottom: 90%;
@@ -494,6 +495,10 @@ a {
   margin-left: -80px;
   opacity: 0;
   transition: all 0.5s;
+}
+
+.constellation-author {
+  margin: 3px 0;
 }
 
 .constellation-text::after {
@@ -531,4 +536,11 @@ a {
 @keyframes move {
   from {top: 100%}
   to {top: 0%}
+}
+
+@keyframes twinkle {
+  0%   { opacity: .7; }
+  30%  { opacity: 1; }
+  70%  { opacity: .8; }
+  100% { opacity: .7; }
 }
