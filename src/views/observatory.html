@@ -2,6 +2,19 @@
 
 {% block content %}
   <body class="obs">
+    <div id="modal" style="display: none">
+      <div class="modal-content">
+        <div class="modal-mid">
+          <div class="modal-title-container">
+            <span id="modal-title">are you sure?</span>
+          </div>
+          <div class="modal-line" style="width: 40%; margin: auto">
+            <button id="delete-yes" class="space-button">yes</button>
+            <button id="delete-no" class="space-button">no</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="obs-top">
       <div class="obs-head">
         <div class="obs-head-container" style="padding-left: 20px;">

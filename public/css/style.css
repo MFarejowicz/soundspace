@@ -484,7 +484,6 @@ a {
   position: relative;
   width: 250px;
   height: 250px;
-  cursor: pointer;
 }
 
 .constellation-text {
@@ -503,8 +502,22 @@ a {
   transition: all 0.5s;
 }
 
-.constellation-author {
+.constellation-middle {
   margin: 3px 0;
+}
+
+.constellation-delete {
+  display: flex;
+  align-items: center;
+}
+
+.constellation-delete-text {
+  margin-right: 5px;
+}
+
+.constellation-delete-img {
+  width: 18px;
+  cursor: pointer;
 }
 
 .constellation-text::after {

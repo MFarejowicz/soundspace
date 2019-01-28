@@ -98,4 +98,23 @@ router.post('/savesong', function(req, res) {
   }
 });
 
+router.post('/deletesong', function(req, res) {
+  if (req.isAuthenticated()) {
+    if (req.user.googleid === req.body.song.ownerId) {
+      Song.deleteOne({ _id: req.body.song._id }, function (err) {
+        if (err) {
+          console.log(err);
+          res.send('An error occurred!');
+        }
+        console.log('song deleted!');
+        res.send('success!');
+      });
+    } else {
+      res.send('you don\'t own this song!');
+    }
+  } else {
+    res.send('Login required.');
+  }
+});
+
 module.exports = router;

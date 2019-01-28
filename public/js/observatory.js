@@ -1,6 +1,7 @@
 let songTimeouts = [];
 let playTimeout;
 let mostRecent;
+let lastClicked;
 
 function back(){
   if (history.length === 1) {
@@ -35,20 +36,18 @@ function startPlayBack(notes, id) {
     );
   }
 
-  const constellation = document.getElementById(id);
-  constellation.onclick = () => {
-    stopPlayBack(notes, id);
-  }
-
   const conImage = document.getElementById(`${id}-image`);
   conImage.style.animation = 'twinkle 2s ease-in-out infinite';
+  conImage.onclick = () => {
+    stopPlayBack(notes, id);
+  }
 
   const playText = document.getElementById(`${id}-click`);
   playText.innerText = 'click to stop!';
 
   const last = notes[notes.length - 1];
   playTimeout = setTimeout(() => {
-    constellation.onclick = () => {
+    conImage.onclick = () => {
       startPlayBack(notes, id);
     }
     conImage.style.animation = '';
@@ -63,19 +62,19 @@ function stopPlayBack(notes, id) {
     clearTimeout(sTimeout);
   }
 
-  const constellation = document.getElementById(id);
-  constellation.onclick = () => {
+  const conImage = document.getElementById(`${id}-image`);
+  conImage.onclick = () => {
     startPlayBack(notes, id);
   }
-  const conImage = document.getElementById(`${id}-image`);
   conImage.style.animation = '';
+
   const playText = document.getElementById(`${id}-click`);
   playText.innerText = 'click to play!';
 
   clearTimeout(playTimeout);
 }
 
-function songDOMObject(song) {
+function songDOMObject(song, userId) {
   const constellations = ['leo', 'aquila', 'aries', 'canismajor', 'cassiopeia', 'andromeda', 'taurus',
     'ursamajor', 'virgo', 'scorpius', 'sagittarius', 'pisces', 'orion', 'libra', 'gemini', 'aquarius',
     'cancer', 'capricornus'];
@@ -94,6 +93,10 @@ function songDOMObject(song) {
   conImage.style.transform = `rotate(${conRotate}deg) scale(0.8)`;
   conImage.style.filter = `hue-rotate(${conHueRotate}deg)`;
   conImage.style.opacity = .7;
+  conImage.style.cursor = 'pointer';
+  conImage.onclick = () => {
+    startPlayBack(song.notes, song._id);
+  }
 
   const conPopup = document.createElement('div');
   conPopup.className = 'constellation-text';
@@ -102,23 +105,49 @@ function songDOMObject(song) {
   conName.innerText = `song: ${song.name}`;
 
   const conAuthor = document.createElement('div');
-  conAuthor.className = 'constellation-author';
+  conAuthor.className = 'constellation-middle';
   conAuthor.innerText = `author: ${song.ownerName}`;
 
   const conPlay = document.createElement('div');
   conPlay.setAttribute('id', `${song._id}-click`);
+  conPlay.className = 'constellation-middle';
   conPlay.innerText = 'click to play!';
 
   conPopup.appendChild(conName);
   conPopup.appendChild(conAuthor);
   conPopup.appendChild(conPlay);
 
+  if (userId && userId === song.ownerId) {
+    const conDelete = document.createElement('div');
+    conDelete.className = 'constellation-delete';
+
+    const conDeleteText = document.createElement('span');
+    conDeleteText.innerText = 'delete:';
+    conDeleteText.className = 'constellation-delete-text';
+    const conDeleteImg = document.createElement('img');
+    conDeleteImg.setAttribute('src', '/static/img/delete_white.png');
+    conDeleteImg.className = 'constellation-delete-img';
+    conDeleteImg.onmouseover = () => {
+      conDeleteImg.setAttribute('src', '/static/img/delete_red.png');
+    }
+    conDeleteImg.onmouseout = () => {
+      conDeleteImg.setAttribute('src', '/static/img/delete_white.png');
+    }
+    conDeleteImg.onclick = () => {
+      stopPlayBack(song.notes, song._id);
+      lastClicked = song;
+      const modal = document.getElementById('modal');
+      modal.style.display = 'block';
+    }
+
+    conDelete.appendChild(conDeleteText);
+    conDelete.appendChild(conDeleteImg);
+
+    conPopup.appendChild(conDelete);
+  }
+
   constellation.appendChild(conPopup);
   constellation.appendChild(conImage);
-
-  constellation.onclick = () => {
-    startPlayBack(song.notes, song._id);
-  }
 
   return constellation;
 }
@@ -134,19 +163,44 @@ function shuffleArray(array) {
 function renderSongs() {
   const songsDiv = document.getElementById('songs');
 
-  axios.get('/api/getsongs')
+  Promise.all([
+    axios.get('/api/getsongs'),
+    axios.get('/api/userinfo')
+  ])
   .then((res) => {
-    const songs = shuffleArray(res.data);
+    const songs = shuffleArray(res[0].data);
+    const userInfo = res[1].data;
+    const userId = userInfo.googleid;
     for (const song of songs) {
-      // console.log(song);
-      songsDiv.appendChild(songDOMObject(song));
+      songsDiv.appendChild(songDOMObject(song, userId));
     }
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
 
 window.onload = () => {
   renderSongs();
+
+  const modal = document.getElementById('modal');
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  document.getElementById('delete-yes').onclick = () => {
+    axios.post('/api/deletesong', { song: lastClicked })
+    .then((res) => {
+      location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  document.getElementById('delete-no').onclick = () => {
+    modal.style.display = 'none';
+  }
 }
