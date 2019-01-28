@@ -4,6 +4,7 @@ let recording = false;
 let startTime = null;
 let song = [];
 let songTimeouts = [];
+let playTimeout;
 
 function startPlayBack() {
   for (let note of song) {
@@ -14,10 +15,19 @@ function startPlayBack() {
     );
   }
   const playButton = document.getElementById('play-button');
-  playButton.innerText = 'stop';
   playButton.onclick = () => {
     stopPlayBack();
   }
+  const playImg = document.getElementById('play-img');
+  playImg.setAttribute('src', '/static/img/stop.png');
+
+  let last = song[song.length - 1];
+  playTimeout = setTimeout(() => {
+    playButton.onclick = () => {
+      startPlayBack();
+    }
+    playImg.setAttribute('src', '/static/img/play.png');
+  }, last.time);
 }
 
 function stopPlayBack() {
@@ -25,10 +35,13 @@ function stopPlayBack() {
     clearTimeout(sTimeout);
   }
   const playButton = document.getElementById('play-button');
-  playButton.innerText = 'play';
   playButton.onclick = () => {
     startPlayBack();
   }
+  const playImg = document.getElementById('play-img');
+  playImg.setAttribute('src', '/static/img/play.png');
+
+  clearTimeout(playTimeout);
 }
 
 function saveSong() {
@@ -76,7 +89,7 @@ function handleRecord() {
     startTime = new Date();
     socket.emit('start record', startTime);
     document.getElementById('record-text').innerText = 'stop';
-    document.getElementById('record-pic').setAttribute('src', '/static/img/stop.png');
+    document.getElementById('record-pic').setAttribute('src', '/static/img/stop_red.png');
   } else {
     savePrompt();
     socket.emit('stop record');
@@ -119,6 +132,7 @@ function toAbout() {
 }
 
 function toObservatory() {
+  closeModal()
   let slide = document.getElementById('hidden-space');
   let top = document.getElementById('top');
   let bot = document.getElementById('bot');
@@ -284,7 +298,7 @@ window.onload = () => {
       //May want to investigate this conditional, seems to stop sounds sometimes
       const spawnInfo = chooseSpawn();
 
-      switch (e.keyCode) {
+      switch (e.keyCode || e.charCode) {
         case 97: // a
           socket.emit('handle sound', 'CsM7', spawnInfo, hue);
           break;
@@ -367,7 +381,7 @@ window.onload = () => {
           console.log(e.keyCode);
       }
     } else if (joinInput === document.activeElement) {
-      if (e.keyCode === 13) {
+      if (e.keyCode === 13 || e.charCode === 13) {
         toSpace(joinInput.value);
       }
     }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat');
 
 html, body {
   font-family: "Lato", sans-serif;
@@ -170,8 +170,8 @@ a {
   top: 200px;
   background-color: #555555;
   margin: auto;
-  padding: 8px 14px;
-  width: 30%;
+  padding: 20px 14px;
+  width: 25%;
   border: 1px solid #404040;
   border-radius: 4px;
   box-shadow: 0 0 20px #000;
@@ -186,13 +186,8 @@ a {
   justify-content: flex-end;
 }
 
-.modal-mid {
-  margin-bottom: 18px;
-}
-
 .modal-title-container {
-  margin-top: -20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
 }
@@ -204,12 +199,25 @@ a {
 .modal-line {
   font-size: 20px;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.modal-line-center {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
   align-items: center;
   margin: 10px 0;
 }
 
 .modal-label {
   margin-right: 4px;
+}
+
+.save-container {
+  display: flex;
 }
 
 #song-name {
@@ -230,10 +238,13 @@ a {
   font-size: 18px;
   color: #444;
   color: rgba(0,0,0,.8);
+  padding: 5px;
   border: 1px solid #999;
   border: transparent;
   background-color: #E6E6E6;
   border-radius: 2px;
+  display: flex;
+  align-items: center;
 }
 
 .space-button:hover {
@@ -437,6 +448,7 @@ a {
 
 .obs-head {
   height: 80px;
+  margin-bottom: 30px;
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -466,16 +478,16 @@ a {
   position: relative;
   width: 250px;
   height: 250px;
+  cursor: pointer;
 }
 
 .constellation-text {
   visibility: hidden;
-  width: 160px;
+  width: 200px;
   background-color: #555;
   color: #fff;
-  text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px 6px;
   position: absolute;
   z-index: 1;
   bottom: 90%;
@@ -483,6 +495,10 @@ a {
   margin-left: -80px;
   opacity: 0;
   transition: all 0.5s;
+}
+
+.constellation-author {
+  margin: 3px 0;
 }
 
 .constellation-text::after {
@@ -520,4 +536,11 @@ a {
 @keyframes move {
   from {top: 100%}
   to {top: 0%}
+}
+
+@keyframes twinkle {
+  0%   { opacity: .7; }
+  30%  { opacity: 1; }
+  70%  { opacity: .8; }
+  100% { opacity: .7; }
 }
