@@ -27,7 +27,7 @@ function startPlayBack() {
       startPlayBack();
     }
     playImg.setAttribute('src', '/static/img/play.png');
-  }, last.time);
+  }, last ? last.time : 0);
 }
 
 function stopPlayBack() {
