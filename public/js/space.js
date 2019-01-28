@@ -139,7 +139,7 @@ function toAbout() {
 }
 
 function toObservatory() {
-  closeModal()
+  closeModal();
   let slide = document.getElementById('hidden-space');
   let top = document.getElementById('top');
   let bot = document.getElementById('bot');
