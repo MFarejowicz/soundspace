@@ -157,7 +157,7 @@ window.onload = () => {
     if (!(joinInput === document.activeElement)) {
       const spawnInfo = chooseSpawn();
 
-      switch (e.keyCode) {
+      switch (e.keyCode || e.charCode) {
         case 97: // a
           socket.emit('handle sound', 'CsM7', spawnInfo, hue);
           break;
@@ -240,7 +240,7 @@ window.onload = () => {
           console.log(e.keyCode);
       }
     } else if (joinInput === document.activeElement) {
-      if (e.keyCode === 13) {
+      if (e.keyCode === 13 || e.charCode === 13) {
         toSpace(joinInput.value);
       }
     }

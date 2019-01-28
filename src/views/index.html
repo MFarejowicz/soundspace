@@ -11,28 +11,28 @@
     </div>
     <div id="bot">
       <div class="bot-container">
-        <a class="bot-link" id="create" onclick="createSpace()">create space</a>
+        <a class="bot-link hvr-grow" id="create" onclick="createSpace()">create space</a>
       </div>
       <div class="bot-container">
         <div id="join-space">
           <span id="join-popup" class="popup hide">
             <input id="join-input" type="text" placeholder="code" maxlength="4">
           </span>
-          <a class="bot-link" id="join" onClick="joinPopup()">join space</a>
+          <a class="bot-link hvr-grow" id="join" onClick="joinPopup()">join space</a>
         </div>
       </div>
       <div class="bot-container">
-        <a class="bot-link" id="about" onClick="toAbout()">about</a>
+        <a class="bot-link hvr-grow" id="about" onClick="toAbout()">about</a>
       </div>
       <div class="bot-container">
         {% if loggedIn %}
-        <a class="bot-link" id="logout" href="/logout">logout</a>
+        <a class="bot-link hvr-grow" id="logout" href="/logout">logout</a>
         {% else %}
-        <a class="bot-link" id="login" href="/auth/google">login</a>
+        <a class="bot-link hvr-grow" id="login" href="/auth/google">login</a>
         {% endif %}
       </div>
       <div class="bot-container">
-        <a class="bot-link" id="obs" onClick="toObservatory()">observatory</a>
+        <a class="bot-link hvr-grow" id="obs" onClick="toObservatory()">observatory</a>
       </div>
     </div>
     <div id="hidden-about">

@@ -4,37 +4,38 @@
   <body class="container">
     <div id="modal" style="display: none">
       <div class="modal-content">
-        <div class="modal-top">
-          <span id="close-modal" onclick="closeModal()">X</span>
-        </div>
         <div id="save-prompt" class="modal-mid">
           <div class="modal-title-container">
-            <span id="modal-title">save your song</span>
+            <span id="modal-title">to the stars!</span>
           </div>
           <div class="modal-line">
-            <span class="modal-label">listen again:</span>
-            <button id="play-button" class="space-button" onclick="startPlayBack()">play</button>
-          </div>
-          <div class="modal-line">
-            <span class="modal-label">name and save:</span>
-            <input id="song-name" type="text" placeholder="name"/>
-            <button class="space-button" onclick="saveSong()">save</button>
+            <button id="play-button" class="space-button" onclick="startPlayBack()">
+              <img id="play-img" src="/static/img/play.png" style="width: 25px"/>
+            </button>
+            <div class="save-container">
+              <input id="song-name" type="text" placeholder="name">
+              <button class="space-button" onclick="saveSong()">
+                <img id="save-img" src="/static/img/save.png" style="width: 25px"/>
+              </button>
+            </div>
+            <button class="space-button" onclick="closeModal()">
+              <img id="delete-img" src="/static/img/delete.png" style="width: 25px"/>
+            </button>
           </div>
           <div id="need-name">your song needs a name!</div>
-          <div class="modal-line">
-            <span class="modal-label">discard:</span>
-            <button class="space-button" onclick="closeModal()">cancel</button>
-          </div>
         </div>
         <div id="save-success" class="modal-mid">
           <div class="modal-title-container">
             <span id="modal-title">song saved successfully</span>
           </div>
-          <div class="modal-line">
+          <div class="modal-line-center">
             <span class="modal-label">find it in the observatory:</span>
             <button class="space-button" onclick=toObservatory()>travel</button>
           </div>
-          <div class="modal-line">
+          <div class="modal-line-center">
+            <span class="modal-label">- or -</span>
+          </div>
+          <div class="modal-line-center">
             <span class="modal-label">stay here:</span>
             <button class="space-button" onclick="closeModal()">cancel</button>
           </div>
@@ -67,28 +68,28 @@
     </div>
     <div id="bot">
       <div class="bot-container">
-        <a class="bot-link" id="leave" onclick="toHome()">leave space</a>
+        <a class="bot-link hvr-grow" id="leave" onclick="toHome()">leave space</a>
       </div>
       <div class="bot-container">
         <div id="join-space">
           <span id="join-popup" class="popup hide">
             <input id="join-input" type="text" placeholder="code" maxlength="4">
           </span>
-          <a class="bot-link" id="join" onClick="joinPopup()">join space</a>
+          <a class="bot-link hvr-grow" id="join" onClick="joinPopup()">join space</a>
         </div>
       </div>
       <div class="bot-container">
-        <a class="bot-link" id="about" onClick="toAbout()">about</a>
+        <a class="bot-link hvr-grow" id="about" onClick="toAbout()">about</a>
       </div>
       <div class="bot-container">
         {% if loggedIn %}
-        <a class="bot-link" id="logout" href="/logout">logout</a>
+        <a class="bot-link hvr-grow" id="logout" href="/logout">logout</a>
         {% else %}
-        <a class="bot-link" id="login" href="/auth/google">login</a>
+        <a class="bot-link hvr-grow" id="login" href="/auth/google">login</a>
         {% endif %}
       </div>
       <div class="bot-container">
-        <a class="bot-link" id="obs" onClick="toObservatory()">observatory</a>
+        <a class="bot-link hvr-grow" id="obs" onClick="toObservatory()">observatory</a>
       </div>
     </div>
     <div id="hidden-about">
