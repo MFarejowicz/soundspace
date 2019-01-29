@@ -74,6 +74,44 @@ function stopPlayBack(notes, id) {
   clearTimeout(playTimeout);
 }
 
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function fadeOutAndRemove(el, removeAfter, removeSpeed) {
+  const seconds = removeSpeed / 1000;
+  el.style.transition = `opacity ${seconds}s ease`;
+  setTimeout(() => el.style.opacity = 0, removeAfter);
+  setTimeout(() => el.parentNode.removeChild(el), removeAfter+removeSpeed);
+}
+
+function appendSpawn() {
+  let top = document.getElementById('obs-top');
+  let spawn = document.createElement('img');
+
+  spawn.setAttribute('src', `/static/img/star${getRandomInt(1, 3)}.png`);
+  spawn.setAttribute('class', 'obs-spawn');
+
+  // Please don't ask
+  let height = parseFloat(window.getComputedStyle(document.getElementById('songs-container')).getPropertyValue('height')) + 70;
+  let marg = parseFloat(window.getComputedStyle(document.getElementById('songs-container')).getPropertyValue('margin-top')) * 2;
+
+  spawn.style.top = `${getRandomInt(0, height + marg)}px`;
+  spawn.style.left = `${getRandomInt(0, 97)}vw`;
+  spawn.style.filter = `hue-rotate(${getRandomInt(0, 360)}deg)`;
+  spawn.style.transform = `scale(${getRandom(.6, 1)})`;
+  spawn.style.zIndex = -1;
+
+  top.appendChild(spawn);
+  fadeOutAndRemove(spawn, 15000, 10000);
+}
+
 function songDOMObject(song, userId) {
   const constellations = ['leo', 'aquila', 'aries', 'canismajor', 'cassiopeia', 'andromeda', 'taurus',
     'ursamajor', 'virgo', 'scorpius', 'sagittarius', 'pisces', 'orion', 'libra', 'gemini', 'aquarius',
@@ -182,6 +220,9 @@ function renderSongs() {
 
 window.onload = () => {
   renderSongs();
+  setInterval(() => {
+    appendSpawn();
+  }, 750);
 
   const modal = document.getElementById('modal');
   window.onclick = (event) => {
