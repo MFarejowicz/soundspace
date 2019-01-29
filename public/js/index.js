@@ -236,6 +236,9 @@ window.onload = () => {
         case 122: // z
           socket.emit('handle sound', 'FsM7', spawnInfo, hue);
           break;
+        case 32: // spacebar
+          socket.emit('handle sound', 'C9', spawnInfo, hue);
+          break;
         default:
           console.log(e.keyCode);
       }

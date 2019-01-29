@@ -81,6 +81,9 @@ var sounds = {
   },
   timer: {
     url: "/static/audio/timer.mp3"
+  },
+  C9: {
+    url: "/static/audio/C9.mp3"
   }
 };
 
