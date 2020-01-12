@@ -1,44 +1,43 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const passport = require("passport");
+const GitHubStrategy = require("passport-github").Strategy;
+const User = require("./models/user");
 
-const User = require('./models/user');
-
-// set up passport configs
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: '/auth/google/callback'
-}, function (accessToken, refreshToken, profile, done) {
-  User.findOne({ googleid: profile.id }, function (err, user) {
-    if (err) return done(err);
-    console.log(`User ${profile.displayName} logged in!`);
-
-    if (!user) {
-      const user = new User({
-        name: profile.displayName,
-        googleid: profile.id,
-        taps: 0,
-        roomsCreated: 0,
-        roomsJoined: 0
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+      callbackURL: "/auth/github/callback"
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      console.log(`User ${profile.username} logged in.`);
+      let user = await User.findOne({
+        github_username: profile.username
       });
-
-      user.save(function (err) {
-        if (err) console.log(err);
-
-        return done(err, user);
-      });
-    } else {
-      return done(err, user);
+      if (!user) {
+        user = new User({
+          name: profile.displayName,
+          github_id: profile.id,
+          github_username: profile.username,
+          taps: 0,
+          roomsCreated: 0,
+          roomsJoined: 0
+        });
+        user = await user.save();
+      }
+      done(null, user);
     }
-  });
-}));
+  )
+);
 
-passport.serializeUser((user, done) => {
-  done(null, user);
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
 });
 
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
 });
 
 module.exports = passport;

@@ -91,30 +91,30 @@ for (let key in sounds) {
   loadSound(key);
 }
 
-function loadSound(name){
+function loadSound(name) {
   let url = sounds[name].url;
 
   var request = new XMLHttpRequest();
-  request.open('GET', url, true);
-  request.responseType = 'arraybuffer';
+  request.open("GET", url, true);
+  request.responseType = "arraybuffer";
 
   // Decode asynchronously
   request.onload = function() {
     context.decodeAudioData(request.response, function(newBuffer) {
       sounds[name].buffer = newBuffer;
     });
-  }
+  };
 
   request.send();
 }
 
-function playSound(name){
+function playSound(name) {
   let buffer = sounds[name].buffer;
 
   if (buffer) {
     let source = context.createBufferSource(); // creates a sound source
-    source.buffer = buffer;                    // tell the source which sound to play
-    source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+    source.buffer = buffer; // tell the source which sound to play
+    source.connect(context.destination); // connect the source to the context's destination (the speakers)
     source.start(0);
   }
 }

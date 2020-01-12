@@ -1,4 +1,4 @@
-function back(){
+function back() {
   if (history.length === 1) {
     window.location = "/";
   } else {
@@ -7,12 +7,12 @@ function back(){
 }
 
 function toHome() {
-  let slide = document.getElementById('hidden-home');
-  let top = document.getElementById('about-top');
-  let bot = document.getElementById('about-bot');
-  slide.classList.toggle('slideDown');
-  top.classList.toggle('slideDown');
-  bot.classList.toggle('slideDown');
+  let slide = document.getElementById("hidden-home");
+  let top = document.getElementById("about-top");
+  let bot = document.getElementById("about-bot");
+  slide.classList.toggle("slideDown");
+  top.classList.toggle("slideDown");
+  bot.classList.toggle("slideDown");
   setTimeout(() => {
     back();
   }, 950);

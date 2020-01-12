@@ -1,60 +1,63 @@
-const express = require('express');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const nunjucks = require('nunjucks');
-require('dotenv').config();
+const express = require("express");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const nunjucks = require("nunjucks");
+require("dotenv").config();
 
-const db = require('./db');
-const passport = require('./passport');
-const views = require('./routes/views');
-const api = require('./routes/api');
+const db = require("./db");
+const passport = require("./passport");
+const views = require("./routes/views");
+const api = require("./routes/api");
 
 const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 
 // Set up body-parser to let us get the body of POST requests
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Set up nunjucks to be used for rendering
-nunjucks.configure('src/views', {
+nunjucks.configure("src/views", {
   autoescape: true,
   express: app
 });
 
 // Set up sessions
-app.use(session({
-  secret: 'session-secret',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: "session-secret",
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
 // Set up actual passport usage
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Set up login route (when you go off to login)
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
-
-// Set up login callback route (when you return from login)
-app.get('/auth/google/callback',
-  passport.authenticate('google', { successReturnToOrRedirect: 'back', failureRedirect: 'back', session: true})
+app.get("/auth/github", passport.authenticate("github"));
+app.get(
+  "/auth/github/callback",
+  passport.authenticate("github", {
+    successReturnToOrRedirect: "back",
+    failureRedirect: "back",
+    session: true
+  })
 );
 
-// Set up logout route
-app.get('/logout', function(req, res) {
+app.get("/auth/logout", (req, res) => {
   req.logout();
-  res.redirect('/');
+  res.redirect("/");
 });
 
-app.use('/', views);
-app.use('/api', api);
-app.use('/static', express.static('public'));
+app.use("/", views);
+app.use("/api", api);
+app.use("/static", express.static("public"));
 
 // Handles 404 errors
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
+  const err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
@@ -62,19 +65,19 @@ app.use(function(req, res, next) {
 // Handles other route errors
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error.html', { status: err.status, message: err.message });
+  res.render("error.html", { status: err.status, message: err.message });
 });
 
 let rooms = {};
 
-io.on('connection', function(socket) {
-  socket.on('join room', (room, user, ship) => {
-    if (user !== 'anon') {
+io.on("connection", function(socket) {
+  socket.on("join room", (room, user, ship) => {
+    if (user !== "anon") {
       socket.username = user.name;
       socket.taps = user.taps;
       socket.ship = ship;
     } else {
-      socket.username = 'anon';
+      socket.username = "anon";
     }
     socket.room = room;
     socket.join(room);
@@ -87,32 +90,34 @@ io.on('connection', function(socket) {
       rooms[room] = roomClients;
     }
 
-    let usersInRoom = rooms[room].filter(el => el.username !== 'anon').map((el) => {
-      return {
-        name: el.username,
-        id: el.id,
-        taps: el.taps,
-        ship: el.ship
-      }
-    })
+    let usersInRoom = rooms[room]
+      .filter(el => el.username !== "anon")
+      .map(el => {
+        return {
+          name: el.username,
+          id: el.id,
+          taps: el.taps,
+          ship: el.ship
+        };
+      });
 
-    io.to(room).emit('user join', usersInRoom);
+    io.to(room).emit("user join", usersInRoom);
   });
 
-  socket.on('handle sound', (sound, spawn, hue) => {
-    io.to(socket.room).emit('handle sound', sound, spawn, hue);
+  socket.on("handle sound", (sound, spawn, hue) => {
+    io.to(socket.room).emit("handle sound", sound, spawn, hue);
   });
 
-  socket.on('user tap', (taps) => {
-    io.to(socket.room).emit('user tap', socket.id, taps);
+  socket.on("user tap", taps => {
+    io.to(socket.room).emit("user tap", socket.id, taps);
   });
 
-  socket.on('start record', (name, time) => {
-    socket.broadcast.to(socket.room).emit('start record', name, time);
+  socket.on("start record", (name, time) => {
+    socket.broadcast.to(socket.room).emit("start record", name, time);
   });
 
-  socket.on('stop record', () => {
-    socket.broadcast.to(socket.room).emit('stop record');
+  socket.on("stop record", () => {
+    socket.broadcast.to(socket.room).emit("stop record");
   });
 
   socket.on("disconnect", () => {
@@ -122,7 +127,7 @@ io.on('connection', function(socket) {
       clientsInRoom.splice(clientsInRoom.indexOf(socket), 1);
     }
 
-    io.to(room).emit('user leave', socket.id);
+    io.to(room).emit("user leave", socket.id);
 
     for (let key in rooms) {
       if (rooms[key].length === 0) {
@@ -132,4 +137,6 @@ io.on('connection', function(socket) {
   });
 });
 
-http.listen(process.env.PORT || 3000, () => console.log('App listening on port 3000!'));
+http.listen(process.env.PORT || 3000, () =>
+  console.log("App listening on port 3000!")
+);

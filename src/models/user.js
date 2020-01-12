@@ -1,13 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Define the user schema
-const UserModelSchema = new mongoose.Schema ({
-  name        	: String,
-  googleid     	: String,
-  taps          : Number,
-  roomsCreated  : Number,
-  roomsJoined   : Number
+const UserSchema = new mongoose.Schema({
+  name: String,
+  github_id: Number,
+  github_username: String,
+  taps: Number,
+  roomsCreated: Number,
+  roomsJoined: Number
 });
 
 // Compile model from schema
-module.exports = mongoose.model('UserModel', UserModelSchema);
+module.exports = mongoose.model("User", UserSchema);

@@ -1,38 +1,44 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <body class="obs">
-    <div id="modal" style="display: none">
-      <div class="modal-content">
-        <div class="modal-mid">
-          <div class="modal-title-container">
-            <span id="modal-title">are you sure?</span>
-          </div>
-          <div class="modal-line" style="width: 40%; margin: auto">
-            <button id="delete-yes" class="space-button">yes</button>
-            <button id="delete-no" class="space-button">no</button>
-          </div>
+{% extends 'base.html' %} {% block content %}
+<body class="obs">
+  <div id="modal" style="display: none">
+    <div class="modal-content">
+      <div class="modal-mid">
+        <div class="modal-title-container">
+          <span id="modal-title">are you sure?</span>
+        </div>
+        <div class="modal-line" style="width: 40%; margin: auto">
+          <button id="delete-yes" class="space-button">yes</button>
+          <button id="delete-no" class="space-button">no</button>
         </div>
       </div>
     </div>
-    <div id="obs-top">
-      <div class="obs-head">
-        <div class="obs-head-container" style="padding-left: 20px;">
-          <img src="/static/img/arrow_left.png" onclick="toHome()" class="hvr-bob-left" style="width: 40px; cursor: pointer"/>
-        </div>
-        <div class="obs-head-container" style="display: flex; justify-content: center">
-          <h1 id="obs-title">observatory</h1>
-        </div>
-        <div class="obs-head-container"></div>
+  </div>
+  <div id="obs-top">
+    <div class="obs-head">
+      <div class="obs-head-container" style="padding-left: 20px;">
+        <img
+          src="/static/img/arrow_left.png"
+          onclick="toHome()"
+          class="hvr-bob-left"
+          style="width: 40px; cursor: pointer"
+        />
       </div>
-    </div>
-    <div id="songs-container">
-      <div id="songs">
-        <!-- songs are inserted here -->
+      <div
+        class="obs-head-container"
+        style="display: flex; justify-content: center"
+      >
+        <h1 id="obs-title">observatory</h1>
       </div>
+      <div class="obs-head-container"></div>
     </div>
-    <div id="hidden-home"></div>
-  </body>
-  <script src="/static/js/sound.js"></script>
-  <script src="/static/js/observatory.js"></script>
+  </div>
+  <div id="songs-container">
+    <div id="songs">
+      <!-- songs are inserted here -->
+    </div>
+  </div>
+  <div id="hidden-home"></div>
+</body>
+<script src="/static/js/sound.js"></script>
+<script src="/static/js/observatory.js"></script>
 {% endblock %}

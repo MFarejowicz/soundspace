@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const NoteSchema = new mongoose.Schema({
   time: Number,
@@ -6,7 +6,7 @@ const NoteSchema = new mongoose.Schema({
 });
 
 // Define the user schema
-const SongSchema = new mongoose.Schema ({
+const SongSchema = new mongoose.Schema({
   name: String,
   ownerId: String,
   ownerName: String,
@@ -17,4 +17,4 @@ const SongSchema = new mongoose.Schema ({
 });
 
 // Compile model from schema
-module.exports = mongoose.model('Song', SongSchema);
+module.exports = mongoose.model("Song", SongSchema);

@@ -1,112 +1,133 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <body class="container">
-    <div id="modal" style="display: none">
-      <div class="modal-content">
-        <div id="save-prompt" class="modal-mid">
-          <div class="modal-title-container">
-            <span id="modal-title">to the stars!</span>
-          </div>
-          <div class="modal-line">
-            <button id="play-button" class="space-button" onclick="startPlayBack()">
-              <img id="play-img" src="/static/img/play.png" style="width: 25px"/>
-            </button>
-            <div class="save-container">
-              <input id="song-name" type="text" placeholder="name">
-              <button class="space-button" onclick="saveSong()">
-                <img id="save-img" src="/static/img/save.png" style="width: 25px"/>
-              </button>
-            </div>
-            <button class="space-button" onclick="closeModal()">
-              <img id="delete-img" src="/static/img/delete.png" style="width: 25px"/>
-            </button>
-          </div>
-          <div id="need-name">your song needs a name!</div>
+{% extends 'base.html' %} {% block content %}
+<body class="container">
+  <div id="modal" style="display: none">
+    <div class="modal-content">
+      <div id="save-prompt" class="modal-mid">
+        <div class="modal-title-container">
+          <span id="modal-title">to the stars!</span>
         </div>
-        <div id="save-success" class="modal-mid">
-          <div class="modal-title-container">
-            <span id="modal-title">song saved successfully</span>
+        <div class="modal-line">
+          <button
+            id="play-button"
+            class="space-button"
+            onclick="startPlayBack()"
+          >
+            <img id="play-img" src="/static/img/play.png" style="width: 25px" />
+          </button>
+          <div class="save-container">
+            <input id="song-name" type="text" placeholder="name" />
+            <button class="space-button" onclick="saveSong()">
+              <img
+                id="save-img"
+                src="/static/img/save.png"
+                style="width: 25px"
+              />
+            </button>
           </div>
-          <div class="modal-line-center">
-            <span class="modal-label">find it in the observatory:</span>
-            <button class="space-button" onclick=toObservatory()>travel</button>
-          </div>
-          <div class="modal-line-center">
-            <span class="modal-label">- or -</span>
-          </div>
-          <div class="modal-line-center">
-            <span class="modal-label">stay here:</span>
-            <button class="space-button" onclick="closeModal()">cancel</button>
-          </div>
+          <button class="space-button" onclick="closeModal()">
+            <img
+              id="delete-img"
+              src="/static/img/delete.png"
+              style="width: 25px"
+            />
+          </button>
+        </div>
+        <div id="need-name">your song needs a name!</div>
+      </div>
+      <div id="save-success" class="modal-mid">
+        <div class="modal-title-container">
+          <span id="modal-title">song saved successfully</span>
+        </div>
+        <div class="modal-line-center">
+          <span class="modal-label">find it in the observatory:</span>
+          <button class="space-button" onclick="toObservatory()">travel</button>
+        </div>
+        <div class="modal-line-center">
+          <span class="modal-label">- or -</span>
+        </div>
+        <div class="modal-line-center">
+          <span class="modal-label">stay here:</span>
+          <button class="space-button" onclick="closeModal()">cancel</button>
         </div>
       </div>
     </div>
-    <div id="top">
-      <div id="top-bar" class="prompt space-prompt">
-        <div id="top-left" class="top-container">
-          <div class="share-title">
-            invite link:
-          </div>
-          <a href="http://sound-space.herokuapp.com/space/{{spacecode}}">
-            sound-space.herokuapp.com/space/{{spacecode}}
-          </a>
+  </div>
+  <div id="top">
+    <div id="top-bar" class="prompt space-prompt">
+      <div id="top-left" class="top-container">
+        <div class="share-title">
+          invite link:
         </div>
-        <div class="top-container" id="prompt-text">
-          <div class="blink" id="space-prompt-text">press any key to start</div>
-        </div>
-        <div id="top-right" class="top-container">
-          {% if loggedIn %}
-          <div id="record" onclick="handleRecord()">
-            <span id="record-text">record</span>
-            <img id="record-pic" src="/static/img/record.png" style="width: 18px"/>
-          </div>
-          {% else %}
-          <div id="record-nli">
-            <span id="record-text-nli">login to record</span>
-            <img id="record-pic-nli"/>
-          </div>
-          {% endif %}
-        </div>
+        <a href="http://sound-space.herokuapp.com/space/{{spacecode}}">
+          sound-space.herokuapp.com/space/{{spacecode}}
+        </a>
       </div>
-      <div id="all-the-ships"></div>
-    </div>
-    <div id="bot">
-      <div class="bot-container">
-        <a class="bot-link hvr-grow" id="leave" onclick="toHome()">leave space</a>
+      <div class="top-container" id="prompt-text">
+        <div class="blink" id="space-prompt-text">press any key to start</div>
       </div>
-      <div class="bot-container">
-        <div id="join-space">
-          <span id="join-popup" class="popup hide">
-            <input id="join-input" type="text" placeholder="code" maxlength="4">
-          </span>
-          <a class="bot-link hvr-grow" id="join" onClick="joinPopup()">join space</a>
-        </div>
-      </div>
-      <div class="bot-container">
-        <a class="bot-link hvr-grow" id="about" onClick="toAbout()">about</a>
-      </div>
-      <div class="bot-container">
+      <div id="top-right" class="top-container">
         {% if loggedIn %}
-        <a class="bot-link hvr-grow" id="logout" href="/logout">logout</a>
+        <div id="record" onclick="handleRecord()">
+          <span id="record-text">record</span>
+          <img
+            id="record-pic"
+            src="/static/img/record.png"
+            style="width: 18px"
+          />
+        </div>
         {% else %}
-        <a class="bot-link hvr-grow" id="login" href="/auth/google">login</a>
+        <div id="record-nli">
+          <span id="record-text-nli">login to record</span>
+          <img id="record-pic-nli" />
+        </div>
         {% endif %}
       </div>
-      <div class="bot-container">
-        <a class="bot-link hvr-grow" id="obs" onClick="toObservatory()">observatory</a>
+    </div>
+    <div id="all-the-ships"></div>
+  </div>
+  <div id="bot">
+    <div class="bot-container">
+      <a class="bot-link hvr-grow" id="leave" onclick="toHome()">leave space</a>
+    </div>
+    <div class="bot-container">
+      <div id="join-space">
+        <span id="join-popup" class="popup hide">
+          <input id="join-input" type="text" placeholder="code" maxlength="4" />
+        </span>
+        <a class="bot-link hvr-grow" id="join" onClick="joinPopup()"
+          >join space</a
+        >
       </div>
     </div>
-    <div id="hidden-about">
-      <div id="about-top">
-        <div class="about-head">
-        </div>
-      </div>
-      <img id="about-bot" src="/static/img/landscape-bot.png" style="width:100%"/>
+    <div class="bot-container">
+      <a class="bot-link hvr-grow" id="about" onClick="toAbout()">about</a>
     </div>
-    <div id="hidden-space"></div>
-  </body>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/static/js/sound.js"></script>
-  <script src="/static/js/space.js"></script>
+    <div class="bot-container">
+      {% if loggedIn %}
+      <a class="bot-link hvr-grow" id="logout" href="/auth/logout">logout</a>
+      {% else %}
+      <a class="bot-link hvr-grow" id="login" href="/auth/github">login</a>
+      {% endif %}
+    </div>
+    <div class="bot-container">
+      <a class="bot-link hvr-grow" id="obs" onClick="toObservatory()"
+        >observatory</a
+      >
+    </div>
+  </div>
+  <div id="hidden-about">
+    <div id="about-top">
+      <div class="about-head"></div>
+    </div>
+    <img
+      id="about-bot"
+      src="/static/img/landscape-bot.png"
+      style="width:100%"
+    />
+  </div>
+  <div id="hidden-space"></div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/sound.js"></script>
+<script src="/static/js/space.js"></script>
 {% endblock %}
