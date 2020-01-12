@@ -7,7 +7,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      callbackURL: "http://sound-space.herokuapp.com/auth/github/callback"
+      callbackURL: "https://sound-space.herokuapp.com/auth/github/callback"
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log(`User ${profile.username} logged in.`);
