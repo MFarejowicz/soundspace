@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const NoteSchema = new mongoose.Schema({
   time: Number,
-  sound: String
+  sound: String,
 });
 
 // Define the user schema
@@ -13,7 +13,7 @@ const SongSchema = new mongoose.Schema({
   timeStamp: String,
   notes: [NoteSchema],
   upvotes: Number,
-  downvotes: Number
+  downvotes: Number,
 });
 
 // Compile model from schema

@@ -7,12 +7,12 @@ passport.use(
     {
       clientID: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      callbackURL: "/auth/github/callback"
+      callbackURL: "/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log(`User ${profile.username} logged in.`);
       let user = await User.findOne({
-        github_username: profile.username
+        github_username: profile.username,
       });
       if (!user) {
         user = new User({
@@ -21,7 +21,7 @@ passport.use(
           github_username: profile.username,
           taps: 0,
           roomsCreated: 0,
-          roomsJoined: 0
+          roomsJoined: 0,
         });
         user = await user.save();
       }
@@ -30,12 +30,12 @@ passport.use(
   )
 );
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
     done(err, user);
   });
 });

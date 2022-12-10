@@ -7,29 +7,17 @@
           <span id="modal-title">to the stars!</span>
         </div>
         <div class="modal-line">
-          <button
-            id="play-button"
-            class="space-button"
-            onclick="startPlayBack()"
-          >
+          <button id="play-button" class="space-button" onclick="startPlayBack()">
             <img id="play-img" src="/static/img/play.png" style="width: 25px" />
           </button>
           <div class="save-container">
             <input id="song-name" type="text" placeholder="name" />
             <button class="space-button" onclick="saveSong()">
-              <img
-                id="save-img"
-                src="/static/img/save.png"
-                style="width: 25px"
-              />
+              <img id="save-img" src="/static/img/save.png" style="width: 25px" />
             </button>
           </div>
           <button class="space-button" onclick="closeModal()">
-            <img
-              id="delete-img"
-              src="/static/img/delete.png"
-              style="width: 25px"
-            />
+            <img id="delete-img" src="/static/img/delete.png" style="width: 25px" />
           </button>
         </div>
         <div id="need-name">your song needs a name!</div>
@@ -55,11 +43,9 @@
   <div id="top">
     <div id="top-bar" class="prompt space-prompt">
       <div id="top-left" class="top-container">
-        <div class="share-title">
-          invite link:
-        </div>
-        <a href="http://sound-space.herokuapp.com/space/{{spacecode}}">
-          sound-space.herokuapp.com/space/{{spacecode}}
+        <div class="share-title">invite link:</div>
+        <a href="https://soundspace.wl.r.appspot.com/space/{{spacecode}}">
+          soundspace.wl.r.appspot.com/space/{{spacecode}}
         </a>
       </div>
       <div class="top-container" id="prompt-text">
@@ -69,11 +55,7 @@
         {% if loggedIn %}
         <div id="record" onclick="handleRecord()">
           <span id="record-text">record</span>
-          <img
-            id="record-pic"
-            src="/static/img/record.png"
-            style="width: 18px"
-          />
+          <img id="record-pic" src="/static/img/record.png" style="width: 18px" />
         </div>
         {% else %}
         <div id="record-nli">
@@ -94,9 +76,7 @@
         <span id="join-popup" class="popup hide">
           <input id="join-input" type="text" placeholder="code" maxlength="4" />
         </span>
-        <a class="bot-link hvr-grow" id="join" onClick="joinPopup()"
-          >join space</a
-        >
+        <a class="bot-link hvr-grow" id="join" onClick="joinPopup()">join space</a>
       </div>
     </div>
     <div class="bot-container">
@@ -110,20 +90,14 @@
       {% endif %}
     </div>
     <div class="bot-container">
-      <a class="bot-link hvr-grow" id="obs" onClick="toObservatory()"
-        >observatory</a
-      >
+      <a class="bot-link hvr-grow" id="obs" onClick="toObservatory()">observatory</a>
     </div>
   </div>
   <div id="hidden-about">
     <div id="about-top">
       <div class="about-head"></div>
     </div>
-    <img
-      id="about-bot"
-      src="/static/img/landscape-bot.png"
-      style="width:100%"
-    />
+    <img id="about-bot" src="/static/img/landscape-bot.png" style="width: 100%" />
   </div>
   <div id="hidden-space"></div>
 </body>

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const mongoURL = process.env.ATLAS_SRV;
 const options = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 };
 mongoose.set("useFindAndModify", false);
 mongoose.connect(mongoURL, options);

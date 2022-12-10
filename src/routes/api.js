@@ -4,13 +4,13 @@ const router = express.Router();
 const User = require("../models/user");
 const Song = require("../models/song");
 
-router.get("/userinfo", function(req, res) {
+router.get("/userinfo", function (req, res) {
   if (req.isAuthenticated()) {
     User.findOne({ github_id: req.user.github_id })
-      .then(user => {
+      .then((user) => {
         res.send(user);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send("An error occurred!");
       });
   } else {
@@ -18,24 +18,20 @@ router.get("/userinfo", function(req, res) {
   }
 });
 
-router.get("/getsongs", function(req, res) {
-  Song.find({}).then(songs => {
+router.get("/getsongs", function (req, res) {
+  Song.find({}).then((songs) => {
     res.send(songs);
   });
 });
 
 // Route to log when a user taps
-router.post("/tap", function(req, res) {
+router.post("/tap", function (req, res) {
   if (req.isAuthenticated()) {
-    User.findOneAndUpdate(
-      { github_id: req.user.github_id },
-      { $inc: { taps: 1 } },
-      { new: true }
-    )
-      .then(user => {
+    User.findOneAndUpdate({ github_id: req.user.github_id }, { $inc: { taps: 1 } }, { new: true })
+      .then((user) => {
         res.send(user);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   } else {
@@ -44,34 +40,32 @@ router.post("/tap", function(req, res) {
 });
 
 // Route to log when a user creates a room
-router.post("/create", function(req, res) {
+router.post("/create", function (req, res) {
   if (req.isAuthenticated()) {
-    User.findOneAndUpdate(
-      { github_id: req.user.github_id },
-      { $inc: { roomsCreated: 1 } }
-    ).catch(err => {
-      console.log(err);
-    });
+    User.findOneAndUpdate({ github_id: req.user.github_id }, { $inc: { roomsCreated: 1 } }).catch(
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   res.send({});
 });
 
 // Route to log when a user joins a room
-router.post("/join", function(req, res) {
+router.post("/join", function (req, res) {
   if (req.isAuthenticated()) {
-    User.findOneAndUpdate(
-      { github_id: req.user.github_id },
-      { $inc: { roomsJoined: 1 } }
-    ).catch(err => {
-      console.log(err);
-    });
+    User.findOneAndUpdate({ github_id: req.user.github_id }, { $inc: { roomsJoined: 1 } }).catch(
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   res.send({});
 });
 
-router.post("/savesong", function(req, res) {
+router.post("/savesong", function (req, res) {
   if (req.isAuthenticated()) {
     const song = new Song({
       name: req.body.name,
@@ -80,10 +74,10 @@ router.post("/savesong", function(req, res) {
       timeStamp: new Date(),
       notes: req.body.song,
       upvotes: 0,
-      downvotes: 0
+      downvotes: 0,
     });
 
-    song.save(function(err) {
+    song.save(function (err) {
       if (err) {
         console.log(err);
         res.send("An error occurred!");
@@ -96,10 +90,10 @@ router.post("/savesong", function(req, res) {
   }
 });
 
-router.post("/deletesong", function(req, res) {
+router.post("/deletesong", function (req, res) {
   if (req.isAuthenticated()) {
     if (req.user.github_id === req.body.song.ownerId) {
-      Song.deleteOne({ _id: req.body.song._id }, function(err) {
+      Song.deleteOne({ _id: req.body.song._id }, function (err) {
         if (err) {
           console.log(err);
           res.send("An error occurred!");

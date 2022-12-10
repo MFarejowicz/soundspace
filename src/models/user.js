@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
   github_username: String,
   taps: Number,
   roomsCreated: Number,
-  roomsJoined: Number
+  roomsJoined: Number,
 });
 
 // Compile model from schema

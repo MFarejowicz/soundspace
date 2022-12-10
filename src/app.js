@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // Set up nunjucks to be used for rendering
 nunjucks.configure("src/views", {
   autoescape: true,
-  express: app
+  express: app,
 });
 
 // Set up sessions
@@ -28,7 +28,7 @@ app.use(
   session({
     secret: "session-secret",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
   })
 );
 
@@ -42,7 +42,7 @@ app.get(
   passport.authenticate("github", {
     successReturnToOrRedirect: "back",
     failureRedirect: "back",
-    session: true
+    session: true,
   })
 );
 
@@ -56,21 +56,21 @@ app.use("/api", api);
 app.use("/static", express.static("public"));
 
 // Handles 404 errors
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   const err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
 
 // Handles other route errors
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error.html", { status: err.status, message: err.message });
 });
 
 let rooms = {};
 
-io.on("connection", function(socket) {
+io.on("connection", function (socket) {
   socket.on("join room", (room, user, ship) => {
     if (user !== "anon") {
       socket.username = user.name;
@@ -91,13 +91,13 @@ io.on("connection", function(socket) {
     }
 
     let usersInRoom = rooms[room]
-      .filter(el => el.username !== "anon")
-      .map(el => {
+      .filter((el) => el.username !== "anon")
+      .map((el) => {
         return {
           name: el.username,
           id: el.id,
           taps: el.taps,
-          ship: el.ship
+          ship: el.ship,
         };
       });
 
@@ -108,7 +108,7 @@ io.on("connection", function(socket) {
     io.to(socket.room).emit("handle sound", sound, spawn, hue);
   });
 
-  socket.on("user tap", taps => {
+  socket.on("user tap", (taps) => {
     io.to(socket.room).emit("user tap", socket.id, taps);
   });
 
@@ -137,6 +137,4 @@ io.on("connection", function(socket) {
   });
 });
 
-http.listen(process.env.PORT || 3000, () =>
-  console.log("App listening on port 3000!")
-);
+http.listen(process.env.PORT || 3000, () => console.log("App listening on port 3000!"));
